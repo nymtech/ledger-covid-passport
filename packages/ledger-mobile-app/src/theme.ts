@@ -8,16 +8,12 @@ export const theme = createTheme({
     fontSize: 16,
   },
   palette: {
-    mode: 'dark',
-    text: {
-      primary: '#ebedf0',
-    },
-    primary: {
-      main: '#f12d50',
-    },
-    secondary: {
-      main: '#f77f95',
-    },
+    // primary: {
+    //   main: '#f12d50',
+    // },
+    // secondary: {
+    //   main: '#f77f95',
+    // },
     // background: {
     //   default: '#070b15',
     // },

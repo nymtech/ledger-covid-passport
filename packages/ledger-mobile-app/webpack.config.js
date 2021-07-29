@@ -1,10 +1,6 @@
 const { mergeWithRules } = require('webpack-merge');
 const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const commonConfig = require('./webpack.common');
 
 module.exports = mergeWithRules({
@@ -42,7 +38,7 @@ module.exports = mergeWithRules({
     ],
   },
   plugins: [
-    new ReactRefreshWebpackPlugin(),
+    // new ReactRefreshWebpackPlugin(),
 
     // this can be included automatically by the dev server, however build mode fails if missing
     new webpack.HotModuleReplacementPlugin(),

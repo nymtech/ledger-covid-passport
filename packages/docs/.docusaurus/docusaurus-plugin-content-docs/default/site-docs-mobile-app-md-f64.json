@@ -1,0 +1,27 @@
+{
+  "unversionedId": "mobile-app",
+  "id": "mobile-app",
+  "isDocsHomePage": false,
+  "title": "Mobile app",
+  "description": "Eiusmod magna ex cupidatat occaecat proident aliqua ullamco cupidatat anim. Aliquip ullamco ullamco incididunt do aliqua cillum duis deserunt exercitation ea sit ex non id tempor exercitation laboris. Labore anim nostrud qui velit aute excepteur ad est tempor nostrud cupidatat anim.",
+  "source": "@site/docs/mobile-app.md",
+  "sourceDirName": ".",
+  "slug": "/mobile-app",
+  "permalink": "/docs/mobile-app",
+  "editUrl": "https://github.com/facebook/docusaurus/edit/master/website/docs/mobile-app.md",
+  "version": "current",
+  "sidebarPosition": 10,
+  "frontMatter": {
+    "id": "mobile-app",
+    "sidebar_position": 10
+  },
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Introduction",
+    "permalink": "/docs/intro"
+  },
+  "next": {
+    "title": "Certificate Uploader",
+    "permalink": "/docs/certificate-uploader"
+  }
+}

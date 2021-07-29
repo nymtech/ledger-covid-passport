@@ -1,72 +1,51 @@
 import * as React from 'react';
-import {
-  Alert,
-  Button,
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  Container,
-} from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { Container } from '@material-ui/core';
+import { IPhoneX } from './components/Devices/IPhoneX';
+import { VaccinationCertificateContainer } from './components/VaccinationCertificate';
+import { VaccinationCertificate } from './components/VaccinationCertificate/types';
 
-import { mainListItems, secondaryListItems } from './listItems';
-import { CenteredGrid } from './components/GridExample';
-import { StyledExample } from './components/StyledExample';
-import { DialogExample } from './components/DialogExample';
-
-export const App: React.FC = () => {
-  const [open, setOpen] = React.useState(true);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  return (
-    <Container sx={{ pb: 10 }}>
-      <Drawer variant="permanent" open={open}>
-        <div>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
-
-      <h1>Material!</h1>
-
-      <h2>Buttons</h2>
-      <Button sx={{ mr: 2 }} color="primary">
-        Primary
-      </Button>
-      <Button sx={{ mr: 2 }} variant="contained">
-        Contained
-      </Button>
-      <Button sx={{ mr: 2 }} variant="outlined">
-        Outlined
-      </Button>
-
-      <h2>Alerts</h2>
-      <Alert severity="error">This is an error alert — check it out!</Alert>
-      <Alert severity="warning">This is a warning alert — check it out!</Alert>
-      <Alert severity="info">This is an info alert — check it out!</Alert>
-      <Alert severity="success">This is a success alert — check it out!</Alert>
-
-      <h2>Grids</h2>
-      <CenteredGrid />
-
-      <h2>
-        <code>styled</code>
-      </h2>
-      <StyledExample />
-
-      <h2>Dialogs</h2>
-      <DialogExample />
-    </Container>
-  );
+const vaccinationCertificate: VaccinationCertificate = {
+  patient: {
+    displayName: 'DOE Joe',
+    givenName: 'Joe',
+    familyName: 'Doe',
+    dateOfBirth: new Date(1957, 6, 5),
+  },
+  diseaseOrAgent: 'SARS-CoV-19',
+  vaccination: {
+    totalPrescribedDoses: 2,
+    doses: [
+      {
+        doseNumber: 1,
+        vaccine: {
+          manufacturer: 'BioNTech',
+          name: 'C19-mRNA',
+          product: 'Comirnaty',
+        },
+        administration: {
+          date: new Date(Date.parse('2021-02-24 13:42:01')),
+          location: {
+            iso3166Alpha2: 'BE',
+            displayName: 'Belgium',
+          },
+        },
+      },
+    ],
+  },
+  certificate: {
+    identifier: 'V1-BE-12345678ASBCD-56789-44',
+    issuedBy: {
+      name: 'BE National Health Service',
+    },
+  },
 };
+
+export const App: React.FC = () => (
+  <Container sx={{ p: 10 }}>
+    <IPhoneX>
+      <VaccinationCertificateContainer
+        vaccinationCertificate={vaccinationCertificate}
+      />
+    </IPhoneX>
+  </Container>
+);
