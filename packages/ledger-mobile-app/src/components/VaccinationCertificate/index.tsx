@@ -7,8 +7,26 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
+import { styled } from '@material-ui/core/styles';
 import { VaccinationCertificate } from './types';
 import { VaccinationAdministrationContainer } from './Vaccines';
+import exampleQRCode from '../../data/qr_code.png';
+
+const CustomStyles = styled('div')(({ theme }) => ({
+  'tr > th, .th-header': {
+    color: theme.palette.grey['400'],
+    fontWeight: 'normal',
+    width: '50%',
+  },
+  'tr > td, .th-content': {
+    fontWeight: 'bold',
+  },
+}));
+
+const ImageWithPadding = styled('img')(({ theme }) => ({
+  objectFit: 'contain',
+  width: '100%',
+}));
 
 export interface VaccinationCertificateProps {
   vaccinationCertificate: VaccinationCertificate;
@@ -16,7 +34,7 @@ export interface VaccinationCertificateProps {
 
 export const VaccinationCertificateContainer: React.FC<VaccinationCertificateProps> =
   ({ vaccinationCertificate }) => (
-    <Box
+    <CustomStyles
       sx={{
         p: 3,
         display: 'flex',
@@ -30,17 +48,16 @@ export const VaccinationCertificateContainer: React.FC<VaccinationCertificatePro
       <Box
         sx={{
           my: 2,
-          width: 200,
-          height: 200,
+          width: 175,
+          height: 175,
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'column',
           alignContent: 'center',
           justifyContent: 'center',
-          bgcolor: 'gray',
         }}
       >
-        <div>QR Code</div>
+        <ImageWithPadding src={exampleQRCode} />
       </Box>
       <Table size="small">
         <TableBody>
@@ -75,20 +92,22 @@ export const VaccinationCertificateContainer: React.FC<VaccinationCertificatePro
             }
           />
           <TableRow>
-            <TableCell component="th" scope="row" sx={{ pt: 3 }} colSpan={2}>
-              <div>Issued by</div>
-              <div>{vaccinationCertificate.certificate.issuedBy.name}</div>
+            <TableCell scope="row" sx={{ pt: 3 }} colSpan={2}>
+              <div className="th-header">Issued by</div>
+              <div className="th-content">
+                {vaccinationCertificate.certificate.issuedBy.name}
+              </div>
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell component="th" scope="row" colSpan={2}>
-              <div>Identifier</div>
-              <div>
+            <TableCell scope="row" colSpan={2}>
+              <div className="th-header">Identifier</div>
+              <div className="th-content">
                 <code>{vaccinationCertificate.certificate.identifier}</code>
               </div>
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
-    </Box>
+    </CustomStyles>
   );

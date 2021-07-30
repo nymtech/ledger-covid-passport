@@ -9,6 +9,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.\.\/node_modules\/qr-scanner\/qr-scanner-worker\.min\.js/i,
+        type: 'asset/source',
+      },
+      {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
