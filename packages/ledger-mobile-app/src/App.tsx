@@ -8,6 +8,7 @@ import { VaccinationCertificate } from './components/VaccinationCertificate/type
 import { PatientContainer } from './components/PatientContainer';
 import { StateProvider, useAppState } from './components/StateProvider';
 import { VerifierContainer } from './components/VerifierContainer';
+import { ScanQRCode } from './components/ScanQRCode';
 
 const vaccinationCertificate: VaccinationCertificate = {
   patient: {
@@ -54,30 +55,40 @@ export const App: React.FC = () => (
 export const AppWithState: React.FC = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
+  const AppWrapper = matches ? DesktopWrapper : React.Fragment;
   const state = useAppState();
+  const [qrCode, setQRCode] = React.useState<string>();
 
-  const AppContainer =
-    state.mode === 'patient' ? PatientContainer : VerifierContainer;
+  React.useEffect(() => {
+    setQRCode(state.qrCode);
+  }, [state.qrCode]);
 
-  if (matches) {
-    // desktop view
+  if (!qrCode) {
     return (
-      <Container sx={{ p: 10 }}>
-        <AppContainer>
-          <IPhoneX>
-            <VaccinationCertificateContainer
-              vaccinationCertificate={vaccinationCertificate}
-            />
-          </IPhoneX>
-        </AppContainer>
-      </Container>
+      <AppWrapper>
+        <ScanQRCode />
+      </AppWrapper>
     );
   }
 
-  // mobile view
   return (
-    <VaccinationCertificateContainer
-      vaccinationCertificate={vaccinationCertificate}
-    />
+    <AppWrapper>
+      <VaccinationCertificateContainer
+        vaccinationCertificate={vaccinationCertificate}
+      />
+    </AppWrapper>
+  );
+};
+
+const DesktopWrapper: React.FC = ({ children }) => {
+  const state = useAppState();
+  const AppContainer =
+    state.mode === 'patient' ? PatientContainer : VerifierContainer;
+  return (
+    <Container sx={{ p: 10 }}>
+      <AppContainer>
+        <IPhoneX>{children}</IPhoneX>
+      </AppContainer>
+    </Container>
   );
 };
