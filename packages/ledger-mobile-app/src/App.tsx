@@ -5,6 +5,9 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IPhoneX } from './components/Devices/IPhoneX';
 import { VaccinationCertificateContainer } from './components/VaccinationCertificate';
 import { VaccinationCertificate } from './components/VaccinationCertificate/types';
+import { PatientContainer } from './components/PatientContainer';
+import { StateProvider, useAppState } from './components/StateProvider';
+import { VerifierContainer } from './components/VerifierContainer';
 
 const vaccinationCertificate: VaccinationCertificate = {
   patient: {
@@ -42,19 +45,31 @@ const vaccinationCertificate: VaccinationCertificate = {
   },
 };
 
-export const App: React.FC = () => {
+export const App: React.FC = () => (
+  <StateProvider>
+    <AppWithState />
+  </StateProvider>
+);
+
+export const AppWithState: React.FC = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('lg'));
+  const state = useAppState();
+
+  const AppContainer =
+    state.mode === 'patient' ? PatientContainer : VerifierContainer;
 
   if (matches) {
     // desktop view
     return (
       <Container sx={{ p: 10 }}>
-        <IPhoneX>
-          <VaccinationCertificateContainer
-            vaccinationCertificate={vaccinationCertificate}
-          />
-        </IPhoneX>
+        <AppContainer>
+          <IPhoneX>
+            <VaccinationCertificateContainer
+              vaccinationCertificate={vaccinationCertificate}
+            />
+          </IPhoneX>
+        </AppContainer>
       </Container>
     );
   }
