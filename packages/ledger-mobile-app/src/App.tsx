@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Container } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { IPhoneX } from './components/Devices/IPhoneX';
 import { VaccinationCertificateContainer } from './components/VaccinationCertificate';
 import { VaccinationCertificate } from './components/VaccinationCertificate/types';
@@ -40,12 +42,27 @@ const vaccinationCertificate: VaccinationCertificate = {
   },
 };
 
-export const App: React.FC = () => (
-  <Container sx={{ p: 10 }}>
-    <IPhoneX>
-      <VaccinationCertificateContainer
-        vaccinationCertificate={vaccinationCertificate}
-      />
-    </IPhoneX>
-  </Container>
-);
+export const App: React.FC = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('lg'));
+
+  if (matches) {
+    // desktop view
+    return (
+      <Container sx={{ p: 10 }}>
+        <IPhoneX>
+          <VaccinationCertificateContainer
+            vaccinationCertificate={vaccinationCertificate}
+          />
+        </IPhoneX>
+      </Container>
+    );
+  }
+
+  // mobile view
+  return (
+    <VaccinationCertificateContainer
+      vaccinationCertificate={vaccinationCertificate}
+    />
+  );
+};
