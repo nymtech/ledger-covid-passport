@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "build": "./scripts/build.sh",
-    "start": "serve dist"
+    "serve": "serve dist",
+    "start": "npm run --workspace packages/ledger-mobile-app start"
   },
   "license": "ISC",
   "devDependencies": {
