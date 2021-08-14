@@ -1,4 +1,4 @@
-# Nym Ledger COVID Passport
+# Nym Private COVID Certificate (PCC)
 
 ## Mobile App
 
