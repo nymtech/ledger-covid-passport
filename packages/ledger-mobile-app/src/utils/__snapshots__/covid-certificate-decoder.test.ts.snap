@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EU and NHS issues COVID certificate decoder fails on invalid string data 1`] = `"Could not determine version. Must start with HC1:xxx, HC2:xxx"`;
+
+exports[`EU and NHS issues COVID certificate decoder fails on invalid string data 2`] = `"Could not determine version. Must start with HC1:xxx, HC2:xxx"`;
+
+exports[`EU and NHS issues COVID certificate decoder fails on invalid string data 3`] = `"Could not determine version. Must start with HC1:xxx, HC2:xxx"`;
+
+exports[`EU and NHS issues COVID certificate decoder fails on invalid string data 4`] = `"Could not determine version. Must start with HC1:xxx, HC2:xxx"`;
+
+exports[`EU and NHS issues COVID certificate decoder fails on invalid string data 5`] = `"Could not determine version. Must start with HC1:xxx, HC2:xxx"`;
+
+exports[`EU and NHS issues COVID certificate decoder fails when version identifier is not present 1`] = `"Insufficient data"`;
