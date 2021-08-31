@@ -38,6 +38,5 @@ module.exports = mergeWithRules({
   output: {
     pathinfo: false,
     filename: 'bundle.[contenthash].js',
-    publicPath: '/material',
   },
 });

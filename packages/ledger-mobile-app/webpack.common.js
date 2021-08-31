@@ -1,17 +1,15 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const WebpackFavicons = require('webpack-favicons');
 
 module.exports = {
   entry: './src/index.tsx',
   module: {
     rules: [
-      {
-        test: /\.\.\/node_modules\/qr-scanner\/qr-scanner-worker\.min\.js/i,
-        type: 'asset/source',
-      },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -34,16 +32,26 @@ module.exports = {
     ],
   },
   resolve: {
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+    },
     extensions: ['.tsx', '.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
     alias: {
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+      cbor: require.resolve('cbor-web'),
     },
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+    }),
+
     new CleanWebpackPlugin(),
 
     new HtmlWebpackPlugin({
+      filename: 'index.html',
       template: path.resolve(__dirname, 'src/index.html'),
     }),
 
@@ -56,8 +64,13 @@ module.exports = {
         },
       },
     }),
+
+    new WebpackFavicons({
+      src: 'static/favicon.png',
+    }),
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
 };
