@@ -1,60 +1,62 @@
 import * as React from 'react';
-import { Box, Button, Typography } from '@material-ui/core';
-import QrScanner from 'qr-scanner';
-import { VideoHTMLAttributes } from 'react';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+  Typography,
+} from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import { QrReader } from '@blackbox-vision/react-qr-reader';
 import { useAppState } from '../StateProvider';
-
-const Video = React.forwardRef<
-  HTMLVideoElement,
-  VideoHTMLAttributes<HTMLVideoElement>
->((props, ref) => (
-  // eslint-disable-next-line jsx-a11y/media-has-caption
-  <video ref={ref} {...props} />
-));
+import { routes } from '../../Routes';
+import { useIsMounted } from '../../hooks/useIsMounted';
 
 export const ScanQRCode: React.FC = () => {
+  const videoId = React.useRef(`video-${new Date().toISOString()}`);
   const state = useAppState();
-  const video = React.useRef<HTMLVideoElement>(null);
-  const scanner = React.useRef<QrScanner>();
   const [validQRCode, setValidQRCode] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>();
-
-  React.useEffect(() => {
-    if (!video.current) {
-      return;
-    }
-
-    scanner.current = new QrScanner(
-      video.current,
-      (result) => {
-        console.log('scanner decode', result);
-        setValidQRCode(true);
-        scanner.current?.destroy();
-        setValue(result);
-        setTimeout(() => state.setQRCode(result), 2000);
-      },
-      () => undefined,
-      400,
-      'user',
-    );
-    scanner.current?.start();
-
-    return () => {
-      scanner.current?.destroy();
-    };
-  }, [video.current]);
+  const history = useHistory();
+  const isMounted = useIsMounted();
 
   return (
-    <Box
-      sx={{
-        px: 3,
-        py: 4,
-      }}
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      mt={5}
+      px={4}
     >
       <Typography variant="h6" mt={2} align="center">
         Scan a QR code
       </Typography>
-      {!validQRCode && <Video ref={video} style={{ width: '100%' }} />}
+      {!validQRCode && (
+        <>
+          <QrReader
+            videoId={videoId.current}
+            constraints={{ facingMode: 'environment' }}
+            onResult={(result, error) => {
+              if (result) {
+                if (isMounted()) {
+                  setValidQRCode(true);
+                  setValue(result.getText());
+                }
+                state.setQRCode(result.getText());
+                setTimeout(() => {
+                  history.push(routes.verifier.view);
+                }, 4000);
+              }
+            }}
+            containerStyle={{ width: '100%' }}
+          />
+          <Box mt={2}>
+            <CircularProgress />
+          </Box>
+          <Typography color="#aaa">Searching for a valid QR code...</Typography>
+        </>
+      )}
       {validQRCode && (
         <Box sx={{ p: 4, bgcolor: 'green', color: 'white' }}>
           <div>Valid QR Code Found</div>
@@ -67,6 +69,7 @@ export const ScanQRCode: React.FC = () => {
             onClick={() => {
               if (value) {
                 state.setQRCode(value);
+                history.push(routes.verifier.view);
               }
             }}
           >
@@ -74,6 +77,6 @@ export const ScanQRCode: React.FC = () => {
           </Button>
         </Box>
       )}
-    </Box>
+    </Grid>
   );
 };
