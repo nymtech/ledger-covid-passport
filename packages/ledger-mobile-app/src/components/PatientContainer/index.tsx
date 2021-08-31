@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { Box, Container } from '@material-ui/core';
-import { AppModeSwitcher } from '../AppModeSwitcher';
 import { lime } from '@material-ui/core/colors';
+import { Link } from 'react-router-dom';
+import { SwitchToVerifier } from '../AppModeSwitcher';
+import { HeaderWithJustify } from '../Headers/HeaderWithJustify';
+import { routes } from '../../Routes';
+
+export const PatientBackground = lime.A200;
 
 export const PatientContainer: React.FC = ({ children }) => (
   <Container>
@@ -12,7 +17,7 @@ export const PatientContainer: React.FC = ({ children }) => (
     </Box>
     <Box
       sx={{
-        background: lime.A200,
+        background: PatientBackground,
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -23,10 +28,34 @@ export const PatientContainer: React.FC = ({ children }) => (
         px: 4,
       }}
     >
-      <h1>
-        End user view <AppModeSwitcher />
-      </h1>
+      <HeaderWithJustify>
+        <div>End user view</div>
+        <SwitchToVerifier />
+      </HeaderWithJustify>
       <div>
+        <div>
+          <ul>
+            <li>
+              <Link to={routes.patient.home}>Reset</Link>
+            </li>
+            <li>
+              <Link to={routes.patient.onboarding}>Onboarding</Link>
+            </li>
+            <li>
+              <Link to={routes.patient.onboardingUpload}>
+                Onboarding : Upload
+              </Link>
+            </li>
+            <li>
+              <Link to={routes.patient.onboardingUploadVerify}>
+                Onboarding : Upload Verify
+              </Link>
+            </li>
+            <li>
+              <Link to={routes.patient.certificate}>Certificate</Link>
+            </li>
+          </ul>
+        </div>
         <p>
           Cillum nulla exercitation nulla proident incididunt dolore dolore
           laborum sunt irure laboris duis. In voluptate amet excepteur voluptate

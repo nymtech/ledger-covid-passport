@@ -2,17 +2,21 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import QrScanner from 'qr-scanner';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './theme';
-import exampleQRCode from './data/qr_code.png';
 
-/**
- * Set up QR code scanner web worker thread. See https://webpack.js.org/guides/asset-modules/ for loader details.
- */
-// eslint-disable-next-line import/extensions
-QrScanner.WORKER_PATH = require('../node_modules/qr-scanner/qr-scanner-worker.min.js');
+Sentry.init({
+  dsn: 'https://56906235033e4a41b616318b7630c6be@o967446.ingest.sentry.io/5918657',
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
@@ -27,9 +31,3 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-(async () => {
-  console.log('qrcode', { exampleQRCode });
-  const qrcode = await QrScanner.scanImage(exampleQRCode);
-  console.log('qrcode(2)', { qrcode });
-})();

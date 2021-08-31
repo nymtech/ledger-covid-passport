@@ -1,0 +1,6 @@
+.nym-camera > .react-html5-camera-photo > video, .nym-camera > .react-html5-camera-photo > img {
+  width: 100%;
+}
+.nym-camera > .react-html5-camera-photo > .display-error {
+  width: 100%;
+}

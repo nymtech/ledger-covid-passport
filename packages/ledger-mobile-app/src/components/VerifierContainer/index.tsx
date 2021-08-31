@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { Box, Container } from '@material-ui/core';
 import { teal } from '@material-ui/core/colors';
-import { AppModeSwitcher } from '../AppModeSwitcher';
+import { Link } from 'react-router-dom';
+import { SwitchToPatient } from '../AppModeSwitcher';
+import { HeaderWithJustify } from '../Headers/HeaderWithJustify';
+import { routes } from '../../Routes';
+
+export const VerifierBackground = teal.A200;
 
 export const VerifierContainer: React.FC = ({ children }) => (
   <Container>
@@ -12,7 +17,7 @@ export const VerifierContainer: React.FC = ({ children }) => (
     </Box>
     <Box
       sx={{
-        bgcolor: teal.A200,
+        bgcolor: VerifierBackground,
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -23,10 +28,24 @@ export const VerifierContainer: React.FC = ({ children }) => (
         px: 4,
       }}
     >
-      <h1>
-        Verifier view <AppModeSwitcher />
-      </h1>
+      <HeaderWithJustify>
+        <div>Verifier view</div>
+        <SwitchToPatient />
+      </HeaderWithJustify>
       <div>
+        <div>
+          <ul>
+            <li>
+              <Link to={routes.verifier.home}>Reset</Link>
+            </li>
+            <li>
+              <Link to={routes.verifier.validate}>Scan QR Code</Link>
+            </li>
+            <li>
+              <Link to={routes.verifier.view}>View certificate</Link>
+            </li>
+          </ul>
+        </div>
         <p>
           Minim ex deserunt incididunt nostrud incididunt veniam veniam occaecat
           proident dolore et laboris. Culpa aute enim irure elit commodo mollit
