@@ -8,7 +8,6 @@ import {
 } from '@material-ui/core';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
-import './html5-camera.css';
 import { useHistory } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../../Routes';

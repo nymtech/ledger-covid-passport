@@ -9,7 +9,6 @@ import {
   useTheme,
 } from '@material-ui/core';
 import 'react-html5-camera-photo/build/css/index.css';
-import './html5-camera.css';
 import { Link } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';

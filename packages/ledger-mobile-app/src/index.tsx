@@ -7,6 +7,7 @@ import { Integrations } from '@sentry/tracing';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { theme } from './theme';
+import './styles.css';
 
 Sentry.init({
   dsn: 'https://56906235033e4a41b616318b7630c6be@o967446.ingest.sentry.io/5918657',
