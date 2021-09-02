@@ -2,15 +2,15 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Onboarding } from './Onboarding';
 import { UploadId } from './UploadId';
-import { PatientLayout as Layout } from '../../../layouts/DefaultLayout';
+import { PatientLayout as Layout } from '../../../../layouts/DefaultLayout';
 import { UploadVerify } from './UploadVerify';
 import { UploadPleaseWait } from './UploadPleaseWait';
 
 export const OnboardingUrlPaths = {
-  onboarding: '/patient/onboarding',
-  onboardingUpload: '/patient/onboarding/upload',
-  onboardingUploadVerify: '/patient/onboarding/verify',
-  onboardingUploadWait: '/patient/onboarding/wait',
+  onboarding: '/patient/uk/onboarding',
+  onboardingUpload: '/patient/uk/onboarding/upload',
+  onboardingUploadVerify: '/patient/uk/onboarding/verify',
+  onboardingUploadWait: '/patient/uk/onboarding/wait',
 };
 
 export const OnboardingRoutes: React.FC = () => (

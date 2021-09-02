@@ -4,8 +4,6 @@ import { Box, Button, Grid, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../Routes';
 import { VerifierLayout as Layout } from '../../layouts/DefaultLayout';
-import { VerifierViewContainer } from '../../components/VerifierViewContainer';
-import { ViewUrlPaths } from './View';
 
 export const VerifierUrlPaths = {
   home: '/verifier',
@@ -16,7 +14,7 @@ export const VerifierRoutes: React.FC = () => (
     <Switch>
       <Route exact path={VerifierUrlPaths.home}>
         <Box p={2}>
-          <Typography my={8} variant="h3">
+          <Typography mx={2} my={8} variant="h3">
             Verify
             <br />
             Private

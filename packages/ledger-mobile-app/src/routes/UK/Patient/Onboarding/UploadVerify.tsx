@@ -10,7 +10,7 @@ import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { useHistory } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { routes } from '../../../Routes';
+import { routes } from '../../../../Routes';
 
 export const UploadVerify: React.FC = () => {
   const randomNumber = React.useRef(
@@ -57,7 +57,7 @@ export const UploadVerify: React.FC = () => {
           onClick={() => {
             setUploading(true);
             setTimeout(() => {
-              history.push(routes.patient.onboardingUploadWait);
+              history.push(routes.uk.patient.onboardingUploadWait);
             }, 3000);
           }}
         >

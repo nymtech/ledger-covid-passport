@@ -1,5 +1,8 @@
 import * as React from 'react';
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Container,
@@ -7,9 +10,11 @@ import {
   Paper,
   Table,
   TableBody,
-  TableRow,
   TableCell,
+  TableRow,
+  Typography,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { OCRFromCamera } from '../OCRFromCamera';
 import imageEULicense from '../../data/norway_driving_licence_front.jpeg';
 import imageUKLicense from '../../data/uk_driving_licence.jpeg';
@@ -18,6 +23,8 @@ import imageUKPassport from '../../data/uk-passport.jpeg';
 import imageUKPassport2 from '../../data/uk-passport-2.jpeg';
 import {
   MRZFields,
+  MRZResult,
+  parseMachineReadableZone,
   parseMachineReadableZoneIntoFields,
 } from '../OCRFromCamera/parseMachineReadableZone';
 
@@ -71,6 +78,7 @@ const DebugOCRStaticImage: React.FC<DebugOCRStaticImageProps> = ({
 }) => {
   const [value, setValue] = React.useState<string>();
   const [fields, setFields] = React.useState<MRZFields | null | undefined>();
+  const [rawFields, setRawFields] = React.useState<MRZResult>();
 
   return (
     <Box mb={2}>
@@ -79,6 +87,7 @@ const DebugOCRStaticImage: React.FC<DebugOCRStaticImageProps> = ({
         onSuccess={(newValue) => {
           setValue(newValue);
           setFields(parseMachineReadableZoneIntoFields(newValue.split('\n')));
+          setRawFields(parseMachineReadableZone(newValue.split('\n')));
         }}
       />
       {value && (
@@ -135,6 +144,34 @@ const DebugOCRStaticImage: React.FC<DebugOCRStaticImageProps> = ({
                     </TableRow>
                   </TableBody>
                 </Table>
+              </>
+            )}
+            {rawFields?.valid && (
+              <>
+                <Box mt={2}>
+                  <h4>Parsed MRZ fields</h4>
+                </Box>
+                <Accordion sx={{ mt: 2 }}>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>All fields</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Box
+                      sx={{
+                        maxWidth: '80vw',
+                        height: '100%',
+                        overflowX: 'auto',
+                        fontSize: '14px',
+                      }}
+                    >
+                      <pre>{JSON.stringify(rawFields, null, 2)}</pre>
+                    </Box>
+                  </AccordionDetails>
+                </Accordion>
               </>
             )}
           </Paper>

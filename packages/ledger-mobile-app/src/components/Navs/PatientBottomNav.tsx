@@ -26,7 +26,7 @@ export const PatientBottomNav: React.FC = () => {
           label="Restart"
           icon={<RestartAltIcon />}
           component={Link}
-          to={routes.patient.home}
+          to={routes.uk.patient.home}
         />
         {isDesktop && (
           <BottomNavigationAction

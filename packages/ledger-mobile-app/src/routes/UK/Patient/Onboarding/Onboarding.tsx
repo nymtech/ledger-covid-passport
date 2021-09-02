@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { routes } from '../../../Routes';
+import { routes } from '../../../../Routes';
 import { OnboardingDocuments } from './Documents';
 
 export const Onboarding: React.FC = () => (
@@ -23,7 +23,7 @@ export const Onboarding: React.FC = () => (
       <Button
         variant="contained"
         color="success"
-        to={routes.patient.onboardingUpload}
+        to={routes.uk.patient.onboardingUpload}
         component={Link}
         sx={{ py: 2 }}
       >

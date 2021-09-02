@@ -2,7 +2,7 @@ import { parse } from 'mrz';
 import type { Result } from 'mrz';
 import { DateTime } from 'luxon';
 
-interface MRZResult {
+export interface MRZResult {
   valid: boolean;
   parsed?: Result;
 }

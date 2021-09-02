@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import { routes } from '../../Routes';
-import { PatientLayout as Layout } from '../../layouts/DefaultLayout';
+import { routes } from '../../../Routes';
+import { PatientLayout as Layout } from '../../../layouts/DefaultLayout';
 
 export const PatientUrlPaths = {
-  home: '/patient',
+  home: '/patient/uk',
 };
 
 export const PatientRoutes: React.FC = () => (
@@ -14,7 +14,7 @@ export const PatientRoutes: React.FC = () => (
     <Switch>
       <Route exact path={PatientUrlPaths.home}>
         <Box p={2}>
-          <Typography my={8} variant="h3">
+          <Typography mx={2} my={8} variant="h3">
             Private
             <br />
             COVID
@@ -31,7 +31,7 @@ export const PatientRoutes: React.FC = () => (
           >
             <Button
               variant="contained"
-              to={routes.patient.onboarding}
+              to={routes.uk.patient.onboarding}
               component={Link}
               sx={{ py: 2 }}
             >

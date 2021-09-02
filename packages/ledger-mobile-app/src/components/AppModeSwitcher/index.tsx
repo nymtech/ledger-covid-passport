@@ -21,8 +21,8 @@ export const SwitchToPatient: React.FC = () => (
     <Button to={routes.home} component={Link}>
       <HomeOutlinedIcon />
     </Button>
-    <Button to={routes.patient.home} component={Link}>
-      Switch to Patient <KeyboardArrowRightIcon />
+    <Button to={routes.user.home} component={Link}>
+      Switch to End User <KeyboardArrowRightIcon />
     </Button>
   </ButtonGroup>
 );

@@ -79,11 +79,11 @@ export const UploadPleaseWait: React.FC = () => {
       <Button
         sx={{ mt: 5 }}
         variant="contained"
-        to={routes.patient.certificate}
+        to={routes.user.app.view.nymPassport}
         component={Link}
         disabled={estimatedTime > IMPATIENCE_THRESHOLD}
       >
-        View certificate <KeyboardArrowRightIcon />
+        View Nym Passport <KeyboardArrowRightIcon />
       </Button>
       {estimatedTime < IMPATIENCE_THRESHOLD && estimatedTime > 0 && (
         <Box>

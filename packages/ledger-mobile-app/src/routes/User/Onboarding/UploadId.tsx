@@ -1,12 +1,5 @@
 import * as React from 'react';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Grid,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Grid, Paper, Typography } from '@material-ui/core';
 import Camera from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import { styled } from '@material-ui/core/styles';
@@ -87,7 +80,7 @@ export const UploadId: React.FC = () => {
             </Button>
             <Button
               variant="contained"
-              to={routes.patient.onboardingUploadVerify}
+              to={routes.user.onboarding.onboardingUploadWait}
               component={Link}
             >
               Upload image <KeyboardArrowRightIcon />

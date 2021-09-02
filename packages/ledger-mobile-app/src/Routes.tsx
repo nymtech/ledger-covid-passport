@@ -5,23 +5,29 @@ import { ValidateRoutes, ValidateUrlPaths } from './routes/Verifier/Validate';
 import {
   CertificateRoutes,
   CertificateUrlPaths,
-} from './routes/Patient/Certificate';
+} from './routes/UK/Patient/Certificate';
 import {
   OnboardingRoutes,
   OnboardingUrlPaths,
-} from './routes/Patient/Onboarding';
+} from './routes/UK/Patient/Onboarding';
+import { UserRoutes, UserUrlPaths } from './routes/User';
 import { VerifierRoutes, VerifierUrlPaths } from './routes/Verifier';
-import { PatientRoutes, PatientUrlPaths } from './routes/Patient';
+import { PatientRoutes, PatientUrlPaths } from './routes/UK/Patient';
 import { HomePage } from './routes/index';
 import { ValidatorViewRoutes, ViewUrlPaths } from './routes/Verifier/View';
 import { DebugRoutes, DebugUrlPaths } from './routes/Debug';
 
 export const routes = {
   home: '/',
-  patient: {
-    ...PatientUrlPaths,
-    ...OnboardingUrlPaths,
-    ...CertificateUrlPaths,
+  user: {
+    ...UserUrlPaths,
+  },
+  uk: {
+    patient: {
+      ...PatientUrlPaths,
+      ...OnboardingUrlPaths,
+      ...CertificateUrlPaths,
+    },
   },
   verifier: {
     ...VerifierUrlPaths,
@@ -36,7 +42,10 @@ export const routes = {
 export const Routes: FC = () => (
   <Router>
     <Switch>
-      <Route path={routes.patient.certificate}>
+      <Route path={routes.user.home}>
+        <UserRoutes />
+      </Route>
+      <Route path={routes.uk.patient.certificate}>
         <CertificateRoutes />
       </Route>
       <Route path={routes.verifier.validate}>
@@ -45,10 +54,10 @@ export const Routes: FC = () => (
       <Route path={routes.verifier.view}>
         <ValidatorViewRoutes />
       </Route>
-      <Route path={routes.patient.onboarding}>
+      <Route path={routes.uk.patient.onboarding}>
         <OnboardingRoutes />
       </Route>
-      <Route path={routes.patient.home}>
+      <Route path={routes.uk.patient.home}>
         <PatientRoutes />
       </Route>
       <Route path={routes.verifier.home}>

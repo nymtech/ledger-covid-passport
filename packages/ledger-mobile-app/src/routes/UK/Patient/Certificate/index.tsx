@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Box } from '@material-ui/core';
-import { PatientLayout as Layout } from '../../../layouts/DefaultLayout';
-import { VaccinationCertificate } from '../../../components/VaccinationCertificate/types';
-import { VaccinationCertificateContainer } from '../../../components/VaccinationCertificate';
-import { PatientBottomNav } from '../../../components/Navs/PatientBottomNav';
+import { PatientLayout as Layout } from '../../../../layouts/DefaultLayout';
+import { VaccinationCertificate } from '../../../../components/VaccinationCertificate/types';
+import { VaccinationCertificateContainer } from '../../../../components/VaccinationCertificate';
+import { PatientBottomNav } from '../../../../components/Navs/PatientBottomNav';
 
 export const CertificateUrlPaths = {
   certificate: '/patient/certificate',

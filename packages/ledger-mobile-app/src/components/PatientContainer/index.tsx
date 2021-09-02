@@ -34,25 +34,50 @@ export const PatientContainer: React.FC = ({ children }) => (
       </HeaderWithJustify>
       <div>
         <div>
+          <h3>Nym Passport App</h3>
           <ul>
             <li>
-              <Link to={routes.patient.home}>Reset</Link>
+              <Link to={routes.user.home}>Reset</Link>
             </li>
             <li>
-              <Link to={routes.patient.onboarding}>Onboarding</Link>
+              <Link to={routes.user.app.home}>App home</Link>
             </li>
             <li>
-              <Link to={routes.patient.onboardingUpload}>
+              View
+              <ul>
+                <li>
+                  <Link to={routes.user.app.view.nymPassport}>
+                    Nym passport
+                  </Link>
+                </li>
+                <li>
+                  <Link to={routes.user.app.view.covidPass.home}>
+                    Private COVID Certificate
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <h3>UK NHS App Style Flow</h3>
+          <ul>
+            <li>
+              <Link to={routes.uk.patient.home}>Reset</Link>
+            </li>
+            <li>
+              <Link to={routes.uk.patient.onboarding}>Onboarding</Link>
+            </li>
+            <li>
+              <Link to={routes.uk.patient.onboardingUpload}>
                 Onboarding : Upload
               </Link>
             </li>
             <li>
-              <Link to={routes.patient.onboardingUploadVerify}>
+              <Link to={routes.uk.patient.onboardingUploadVerify}>
                 Onboarding : Upload Verify
               </Link>
             </li>
             <li>
-              <Link to={routes.patient.certificate}>Certificate</Link>
+              <Link to={routes.uk.patient.certificate}>Certificate</Link>
             </li>
           </ul>
         </div>

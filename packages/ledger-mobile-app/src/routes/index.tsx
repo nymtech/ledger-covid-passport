@@ -36,11 +36,11 @@ export const HomePage: FC = () => (
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>
         <Item sx={{ background: PatientBackground }}>
-          <Link to={routes.patient.home}>
+          <Link to={routes.user.home}>
             <Box display="flex" alignContent="center" justifyContent="center">
               <EmojiPeopleIcon />
               <Typography mx={1} fontSize="large">
-                Patient
+                End User
               </Typography>
               <ChevronRightIcon />
             </Box>

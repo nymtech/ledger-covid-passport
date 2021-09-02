@@ -33,7 +33,7 @@ export const VerifierBottomNav: React.FC = () => {
             label="Patient mode"
             icon={<KeyboardArrowRightIcon />}
             component={Link}
-            to={routes.patient.home}
+            to={routes.uk.patient.home}
           />
         )}
       </BottomNavigation>
