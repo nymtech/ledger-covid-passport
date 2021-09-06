@@ -31,7 +31,7 @@ export const UserRoutes: React.FC = () => (
       <Route exact path={UserUrlPaths.home}>
         <SplashScreen />
       </Route>
-      <Route path={OnboardingUrlPaths.onboarding}>
+      <Route path={OnboardingUrlPaths.home}>
         <OnboardingRoutes />
       </Route>
       <Route path={AppUrlPaths.home}>
@@ -62,7 +62,7 @@ const SplashScreen: React.FC = () => (
     >
       <Button
         variant="contained"
-        to={routes.user.onboarding.onboarding}
+        to={routes.user.onboarding.home}
         component={Link}
         sx={{ py: 2 }}
       >

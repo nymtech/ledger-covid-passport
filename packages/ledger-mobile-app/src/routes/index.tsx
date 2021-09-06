@@ -9,6 +9,7 @@ import { styled } from '@material-ui/core/styles';
 import { PatientBackground } from 'src/components/PatientContainer';
 import { routes } from '../Routes';
 import { VerifierBackground } from '../components/VerifierContainer';
+import { NavAwareDocs } from '../components/NavAwareDocs';
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -20,18 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const HomePage: FC = () => (
   <Container>
-    <h1>Nym Private COVID Certificate (PCC)</h1>
-    <p>
-      The existing Digital Covid Certificates do not provide strong privacy
-      properties, it can expose a lot of information about an individual, and
-      can further be used to create a map of the places the person has visited
-      and therefore be used as a tracking system.
-    </p>
-    <p>
-      We propose a privacy enhanced version using blinded and re-randomizable
-      Coconut credentials that can tackle the above issues. We call this product
-      Private Covid Certificate (PCC).
-    </p>
+    <NavAwareDocs />
 
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>

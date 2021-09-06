@@ -5,7 +5,7 @@ import { UploadId } from './UploadId';
 import { UploadPleaseWait } from './UploadPleaseWait';
 
 export const OnboardingUrlPaths = {
-  onboarding: '/user/onboarding',
+  home: '/user/onboarding',
   onboardingUpload: '/user/onboarding/upload',
   onboardingUploadWait: '/user/onboarding/wait',
 };
@@ -15,7 +15,7 @@ export const OnboardingRoutes: React.FC = () => (
     <Route exact path={OnboardingUrlPaths.onboardingUpload}>
       <UploadId />
     </Route>
-    <Route exact path={OnboardingUrlPaths.onboarding}>
+    <Route exact path={OnboardingUrlPaths.home}>
       <Onboarding />
     </Route>
     <Route exact path={OnboardingUrlPaths.onboardingUploadWait}>
