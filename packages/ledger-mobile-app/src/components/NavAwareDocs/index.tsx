@@ -4,6 +4,7 @@ import { routes } from '../../Routes';
 
 import RoutesHome from '../../content/home.mdx';
 import RoutesUserHome from '../../content/user/home.mdx';
+import RoutesUserSplash from '../../content/user/splash.mdx';
 import RoutesUserOnboardingHome from '../../content/user/onboarding/home.mdx';
 import RoutesUserOnboardingOnboardingUpload from '../../content/user/onboarding/step1-upload.mdx';
 import RoutesUserOnboardingOnboardingUploadWait from '../../content/user/onboarding/step2-verify.mdx';
@@ -21,6 +22,9 @@ export const NavAwareDocs: React.FC = () => {
     <Switch>
       <Route exact path={routes.home}>
         <RoutesHome components={components} />
+      </Route>
+      <Route exact path={routes.user.home}>
+        <RoutesUserSplash components={components} />
       </Route>
       <Route exact path={routes.user.app.home}>
         <RoutesUserHome components={components} />

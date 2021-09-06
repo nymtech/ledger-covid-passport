@@ -2,6 +2,7 @@ import base45 from 'base45-js';
 import pako from 'pako';
 // import cose from 'cose-js';
 import * as cbor from 'cbor';
+import { HCertWrapper, isHCertWrapper } from '../models/hcert';
 
 // verifier-api.coronacheck.nl/v4/verifier/public_keys
 const publicKey =
@@ -97,4 +98,14 @@ export const decodeCovidCertificate = async (
 
   // return as an object
   return obj;
+};
+
+export const decodeCovidCertificateAndValidate = async (
+  qrCodeContents: string,
+): Promise<HCertWrapper> => {
+  const value = await decodeCovidCertificate(qrCodeContents);
+  if (!isHCertWrapper(value)) {
+    throw new Error('Not a valid health certificate');
+  }
+  return value;
 };

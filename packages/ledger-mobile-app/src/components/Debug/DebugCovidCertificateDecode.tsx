@@ -11,6 +11,7 @@ const links = [
   'https://github.com/ehn-dcc-development',
   'https://github.com/ehn-dcc-development/hcert-spec/blob/main/hcert_spec.md',
   'https://ec.europa.eu/health/sites/default/files/ehealth/docs/digital-green-certificates_v3_en.pdf',
+  'https://ec.europa.eu/health/sites/default/files/ehealth/docs/covid-certificate_json_specification_en.pdf',
   'https://datatracker.ietf.org/doc/html/rfc8392',
   'https://ehealth.vyncke.org/',
   'https://github.com/ehn-dcc-development/ehn-sign-verify-javascript-trivial/blob/main/cose_verify.js',

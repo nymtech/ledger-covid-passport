@@ -1,21 +1,15 @@
 import * as React from 'react';
-import {
-  Box,
-  Button,
-  Chip,
-  FormControlLabel,
-  Grid,
-  Switch,
-} from '@material-ui/core';
+import { Box, Button, FormControlLabel, Grid, Switch } from '@material-ui/core';
 import QRCode from 'react-qr-code';
 import { Link } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
-import { DateTime } from 'luxon';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import { routes } from '../../../../Routes';
+import { useAppState } from '../../../../components/StateProvider';
+import { HCertValidity } from '../../../../components/HealthCertificate/HCertValidity';
 
 export const ViewCovidPassHome: React.FC = () => {
-  const validUntil = React.useRef(DateTime.local().plus({ days: 30 }));
+  const state = useAppState();
   return (
     <Grid
       flexDirection="column"
@@ -26,18 +20,14 @@ export const ViewCovidPassHome: React.FC = () => {
     >
       <h2>Private COVID Certificate</h2>
       <Box>
-        <Chip
-          icon={<BeenhereOutlinedIcon />}
-          label={`Valid until ${validUntil.current.toFormat('dd MMM yyyy')}`}
-          color="success"
-          sx={{ p: 1 }}
-        />
+        <HCertValidity wrapper={state.hcert} />
         <Button
           sx={{ ml: 2 }}
           to={routes.user.app.view.covidPass.reveal}
           component={Link}
         >
-          View <KeyboardArrowRightIcon />
+          <VisibilityOutlinedIcon sx={{ mr: 1 }} />
+          <KeyboardArrowRightIcon />
         </Button>
       </Box>
 

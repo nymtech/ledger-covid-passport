@@ -4,6 +4,7 @@ import {
   AlertTitle,
   Box,
   Button,
+  Chip,
   CircularProgress,
   Grid,
   Typography,
@@ -11,23 +12,35 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 import { QrReader } from '@blackbox-vision/react-qr-reader';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { useAppState } from '../../../components/StateProvider';
 import { useIsMounted } from '../../../hooks/useIsMounted';
 import { routes } from '../../../Routes';
-import { decodeCovidCertificate } from '../../../utils/covid-certificate-decoder';
+import { decodeCovidCertificateAndValidate } from '../../../utils/covid-certificate-decoder';
+import { HCertWrapper } from '../../../models/hcert';
+import { HealthCertificate } from '../../../components/HealthCertificate';
+import { HCertValidity } from '../../../components/HealthCertificate/HCertValidity';
 
 export const AddCovidPass: React.FC = () => {
   const videoId = React.useRef(`video-${new Date().toISOString()}`);
   const state = useAppState();
   const [value, setValue] = React.useState<string>();
-  const [certificate, setCertificate] = React.useState<any>(null);
+  const [certificate, setCertificate] = React.useState<HCertWrapper | null>(
+    null,
+  );
   const [error, setError] = React.useState<Error>();
   const history = useHistory();
   const isMounted = useIsMounted();
 
   React.useEffect(() => {
     if (value) {
-      decodeCovidCertificate(value).then(setCertificate).catch(setError);
+      decodeCovidCertificateAndValidate(value)
+        .then((newValue) => {
+          setCertificate(newValue);
+          state.setHCert(newValue);
+        })
+        .catch(setError);
     }
   }, [value]);
 
@@ -46,7 +59,18 @@ export const AddCovidPass: React.FC = () => {
         </Button>
       </Box>
 
-      <h2 style={{ width: '100%' }}>Scan a QR code</h2>
+      {!certificate && <h2 style={{ width: '100%' }}>Scan a QR code</h2>}
+      {certificate && (
+        <Box my={2}>
+          <Button
+            sx={{ p: 2 }}
+            variant="contained"
+            onClick={() => history.push(routes.user.app.view.covidPass.home)}
+          >
+            Add to wallet <KeyboardArrowRightIcon />
+          </Button>
+        </Box>
+      )}
       {!value && (
         <>
           <QrReader
@@ -94,11 +118,18 @@ export const AddCovidPass: React.FC = () => {
         </>
       )}
       {certificate && (
-        <Box mt={2} maxWidth="100%">
-          <Box>Found valid certificate</Box>
-          <Box sx={{ overflowX: 'auto' }}>
-            <pre>{JSON.stringify(certificate, null, 2)}</pre>
-          </Box>
+        <Box width="100%">
+          <Grid
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
+            mb={2}
+          >
+            <HCertValidity wrapper={certificate} />
+          </Grid>
+          <HealthCertificate wrapper={certificate} />
         </Box>
       )}
     </Grid>
