@@ -16,11 +16,25 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        test: /\.mdx?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: '@mdx-js/loader',
+            options: {
+              remarkPlugins: [],
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2|md)$/i,
         // More information here https://webpack.js.org/guides/asset-modules/
         type: 'asset',
       },
@@ -35,12 +49,15 @@ module.exports = {
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
+      // assert: require.resolve('assert/'),
+      // process: require.resolve('process/browser'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
     alias: {
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
       cbor: require.resolve('cbor-web'),
+      fs: 'empty', // see https://mdxjs.com/getting-started/webpack
     },
   },
   plugins: [
