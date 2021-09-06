@@ -10,7 +10,7 @@ export const ScanUserQrCode: React.FC = () => {
   const history = useHistory();
   return (
     <Grid
-      direction="column"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
       mt={5}

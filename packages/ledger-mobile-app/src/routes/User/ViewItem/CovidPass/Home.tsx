@@ -18,7 +18,7 @@ export const ViewCovidPassHome: React.FC = () => {
   const validUntil = React.useRef(DateTime.local().plus({ days: 30 }));
   return (
     <Grid
-      direction="column"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
       mt={5}

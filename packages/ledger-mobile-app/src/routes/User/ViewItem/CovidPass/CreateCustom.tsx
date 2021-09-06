@@ -6,7 +6,7 @@ import { routes } from '../../../../Routes';
 
 export const CovidPassCreateCustom: React.FC = () => (
   <Grid
-    direction="column"
+    flexDirection="column"
     justifyContent="center"
     alignItems="center"
     mt={5}

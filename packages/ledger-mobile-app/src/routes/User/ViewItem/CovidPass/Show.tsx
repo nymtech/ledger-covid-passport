@@ -8,7 +8,7 @@ import { VaccinationCertificateContainer } from '../../../../components/Vaccinat
 
 export const CovidPassShow: React.FC = () => (
   <Grid
-    direction="column"
+    flexDirection="column"
     justifyContent="center"
     alignItems="center"
     mt={5}

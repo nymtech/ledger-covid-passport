@@ -10,7 +10,7 @@ export const CovidPassScanVerifier: React.FC = () => {
   const history = useHistory();
   return (
     <Grid
-      direction="column"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
       mt={5}
@@ -18,7 +18,7 @@ export const CovidPassScanVerifier: React.FC = () => {
     >
       <Grid
         display="flex"
-        direction="row"
+        flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
         width="100%"

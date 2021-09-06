@@ -22,7 +22,7 @@ export const ValidateSuccess: React.FC = () => {
   const theme = useTheme();
   return (
     <Grid
-      direction="column"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
       mt={5}

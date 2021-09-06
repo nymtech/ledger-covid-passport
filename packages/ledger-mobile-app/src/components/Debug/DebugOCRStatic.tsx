@@ -40,7 +40,7 @@ export const DebugOCRStatic: React.FC = () => {
       <Grid
         key={key}
         container
-        direction="column"
+        flexDirection="column"
         justifyContent="center"
         alignItems="center"
         mt={5}

@@ -12,7 +12,7 @@ export const CovidPassShowPrivate: React.FC = () => {
   const [value, setValue] = React.useState(randomValue());
   return (
     <Grid
-      direction="column"
+      flexDirection="column"
       justifyContent="center"
       alignItems="center"
       mt={5}

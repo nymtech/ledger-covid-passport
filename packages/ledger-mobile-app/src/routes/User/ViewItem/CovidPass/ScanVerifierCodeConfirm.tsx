@@ -9,7 +9,7 @@ import { routes } from '../../../../Routes';
 
 export const CovidPassConfirmVerifierCode: React.FC = () => (
   <Grid
-    direction="column"
+    flexDirection="column"
     justifyContent="center"
     alignItems="center"
     mt={5}

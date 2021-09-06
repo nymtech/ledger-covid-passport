@@ -5,7 +5,7 @@ import QRCode from 'react-qr-code';
 
 export const ViewNymPassport: React.FC = () => (
   <Grid
-    direction="column"
+    flexDirection="column"
     justifyContent="center"
     alignItems="center"
     mt={5}
