@@ -32,11 +32,11 @@ module.exports = mergeWithRules({
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'bundle.[contenthash].css',
+      filename: '[name].[contenthash].css',
     }),
   ],
   output: {
     pathinfo: false,
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
   },
 });

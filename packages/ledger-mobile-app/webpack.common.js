@@ -17,17 +17,7 @@ module.exports = {
       },
       {
         test: /\.mdx?$/,
-        use: [
-          {
-            loader: 'babel-loader',
-          },
-          {
-            loader: '@mdx-js/loader',
-            options: {
-              remarkPlugins: [],
-            },
-          },
-        ],
+        use: ['babel-loader', './webpack/plugins/mdx-loader'],
       },
       {
         test: /\.css$/i,
@@ -49,15 +39,13 @@ module.exports = {
     fallback: {
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
-      // assert: require.resolve('assert/'),
-      // process: require.resolve('process/browser'),
     },
     extensions: ['.tsx', '.ts', '.js'],
     plugins: [new TsconfigPathsPlugin()],
     alias: {
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
       cbor: require.resolve('cbor-web'),
-      fs: 'empty', // see https://mdxjs.com/getting-started/webpack
+      // fs: 'empty', // see https://mdxjs.com/getting-started/webpack
     },
   },
   plugins: [
