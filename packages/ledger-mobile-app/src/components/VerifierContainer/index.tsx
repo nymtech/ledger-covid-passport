@@ -40,19 +40,6 @@ export const VerifierContainer: React.FC = ({ children }) => (
         <SwitchToPatient />
       </HeaderWithJustify>
       <div>
-        <div>
-          <ul>
-            <li>
-              <Link to={routes.verifier.home}>Reset</Link>
-            </li>
-            <li>
-              <Link to={routes.verifier.validate}>Scan QR Code</Link>
-            </li>
-            <li>
-              <Link to={routes.verifier.view}>View certificate</Link>
-            </li>
-          </ul>
-        </div>
         <NavAwareDocs />
       </div>
     </Box>

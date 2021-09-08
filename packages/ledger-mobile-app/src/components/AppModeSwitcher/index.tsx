@@ -4,12 +4,14 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
 import { Link } from 'react-router-dom';
 import { routes } from '../../Routes';
+import { MagicNav } from '../MagicNav';
 
 export const SwitchToVerifier: React.FC = () => (
   <ButtonGroup color="secondary" variant="text">
     <Button to={routes.home} component={Link}>
       <HomeOutlinedIcon />
     </Button>
+    <MagicNav />
     <Button to={routes.verifier.home} component={Link}>
       Switch to Verifier <KeyboardArrowRightIcon />
     </Button>
@@ -21,6 +23,7 @@ export const SwitchToPatient: React.FC = () => (
     <Button to={routes.home} component={Link}>
       <HomeOutlinedIcon />
     </Button>
+    <MagicNav />
     <Button to={routes.user.home} component={Link}>
       Switch to End User <KeyboardArrowRightIcon />
     </Button>

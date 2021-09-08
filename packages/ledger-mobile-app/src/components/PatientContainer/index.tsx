@@ -6,6 +6,7 @@ import { SwitchToVerifier } from '../AppModeSwitcher';
 import { HeaderWithJustify } from '../Headers/HeaderWithJustify';
 import { routes } from '../../Routes';
 import { NavAwareDocs } from '../NavAwareDocs';
+import { MagicNav } from '../MagicNav';
 
 export const PatientBackground = lime.A200;
 
