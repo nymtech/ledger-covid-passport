@@ -23,6 +23,18 @@ The mobile app uses the following key libraries:
 - Health certificate decoding libraries and forks from European Union's Digital Green Certificate efforts via the [European eHealth network](https://github.com/ehn-dcc-development).
 - [Tesseract.js](https://tesseract.projectnaptha.com/) and [`mrz`](https://www.npmjs.com/package/mrz), to OCR and decode the Machine Readable Zones of documents such as passports.
 
+## Getting Started
+
+Developers will need to do the following to get their environment set up:
+
+1. Install NodeJS using Node Version Manager (`nvm`) by following these instructions: https://github.com/nvm-sh/nvm#installing-and-updating
+
+2. `nvm install`
+
+The correct version of NodeJS will be installed.
+
+3. `npm install`
+
 ## Mobile App
 
 Run the apps in dev mode:
