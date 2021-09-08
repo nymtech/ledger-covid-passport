@@ -36,14 +36,7 @@ export const HomePage: FC = () => (
             </Box>
           </Link>
           <p>
-            Minim ex deserunt incididunt nostrud incididunt veniam veniam
-            occaecat proident dolore et laboris. Culpa aute enim irure elit
-            commodo mollit elit ipsum quis anim fugiat sit quis. Esse sint
-            laborum exercitation consectetur aliqua nostrud et mollit eiusmod eu
-            excepteur mollit adipisicing velit. Officia velit proident irure qui
-            culpa cillum veniam. Ipsum esse pariatur excepteur proident deserunt
-            elit dolor enim adipisicing adipisicing proident proident aute
-            voluptate pariatur.
+          The End User in Nym PCC is someone who has received two doses of COVID-19 vaccine, or had previously been affected and has now tested negative.
           </p>
         </Item>
       </Grid>
@@ -59,14 +52,7 @@ export const HomePage: FC = () => (
             </Box>
           </Link>
           <p>
-            Non ut ipsum sint velit magna aute laboris amet velit mollit sit
-            nulla ullamco. Dolore excepteur commodo velit aliquip quis nostrud
-            adipisicing cillum exercitation nostrud. Proident ullamco cupidatat
-            veniam occaecat laboris excepteur mollit consequat ad commodo ad
-            anim labore nulla est exercitation. Tempor Lorem nisi aliqua ipsum
-            eiusmod elit reprehenderit sit qui commodo proident ullamco
-            reprehenderit excepteur aliqua ipsum culpa. Ex nostrud enim do
-            occaecat ullamco magna.
+          The Verifier in this system is someone who needs to check the End User's digital certificate (credential). The Verifier can be a border officer, the security at a restaurant, etc.
           </p>
         </Item>
       </Grid>
