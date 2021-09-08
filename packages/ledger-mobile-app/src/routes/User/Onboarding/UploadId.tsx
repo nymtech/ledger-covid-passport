@@ -35,6 +35,7 @@ export const UploadId: React.FC = () => {
             <Camera
               isFullscreen={false}
               idealFacingMode="environment"
+              isImageMirror={false}
               onTakePhoto={(dataUri) => {
                 if (isMounted()) {
                   setImageDataUri(dataUri);
