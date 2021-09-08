@@ -2,19 +2,22 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { routes } from '../../Routes';
 
-import RoutesHome from '../../content/home.mdx';
-import RoutesUserHome from '../../content/user/home.mdx';
-import RoutesUserSplash from '../../content/user/splash.mdx';
-import RoutesUserOnboardingHome from '../../content/user/onboarding/home.mdx';
-import RoutesUserOnboardingOnboardingUpload from '../../content/user/onboarding/step1-upload.mdx';
-import RoutesUserOnboardingOnboardingUploadWait from '../../content/user/onboarding/step2-verify.mdx';
-import RoutesUserAppAddCovidPass from '../../content/user/wallet/add/covid-pass.mdx';
-import RoutesUserAppViewNymPassport from '../../content/user/nym-id.mdx';
-import RoutesUserAppViewCovidPassHome from '../../content/user/wallet/view/covid-pass/home.mdx';
-import RoutesUserAppViewCovidPassShowPCC from '../../content/user/wallet/view/covid-pass/show-pcc.mdx';
-import RoutesUserAppViewCovidPassNewCustom from '../../content/user/wallet/view/covid-pass/new-custom.mdx';
-import RoutesUserAppViewCovidPassScanVerifierCode from '../../content/user/wallet/view/covid-pass/scan-verifier-code.mdx';
-import RoutesUserAppViewCovidPassConfirmVerifierCode from '../../content/user/wallet/view/covid-pass/confirm-verifier-code.mdx';
+// import this way so that webpack handles the chunking
+const {
+  RoutesHome,
+  RoutesUserHome,
+  RoutesUserSplash,
+  RoutesUserOnboardingHome,
+  RoutesUserOnboardingOnboardingUpload,
+  RoutesUserOnboardingOnboardingUploadWait,
+  RoutesUserAppAddCovidPass,
+  RoutesUserAppViewNymPassport,
+  RoutesUserAppViewCovidPassHome,
+  RoutesUserAppViewCovidPassShowPCC,
+  RoutesUserAppViewCovidPassNewCustom,
+  RoutesUserAppViewCovidPassScanVerifierCode,
+  RoutesUserAppViewCovidPassConfirmVerifierCode,
+} = require('../../content/index');
 
 export const NavAwareDocs: React.FC = () => {
   const components = {};

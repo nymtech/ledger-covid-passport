@@ -7,7 +7,15 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const WebpackFavicons = require('webpack-favicons');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: {
+    index: {
+      import: './src/index.tsx',
+      dependOn: 'content',
+    },
+    content: {
+      import: './src/content/index.js',
+    },
+  },
   module: {
     rules: [
       {
