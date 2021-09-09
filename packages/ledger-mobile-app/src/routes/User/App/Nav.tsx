@@ -108,7 +108,7 @@ export const AppNav: React.FC = () => {
       <Paper sx={{ width: '100%' }} elevation={3}>
         <BottomNavigation showLabels>
           <BottomNavigationAction
-            label="Nym Passport"
+            label="Nym Id"
             icon={<EmojiPeopleIcon />}
             component={Link}
             to={routes.user.app.view.nymId}
