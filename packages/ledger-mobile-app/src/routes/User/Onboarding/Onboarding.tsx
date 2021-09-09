@@ -25,7 +25,7 @@ export const Onboarding: React.FC = () => (
   >
     <Typography mb={3} textAlign="center">
       We need to authenticate your identity before we can issue you a private
-      Nym passport
+      Nym ID
     </Typography>
     <Typography mb={3} fontWeight="bold" fontSize="larger">
       Either upload your Id

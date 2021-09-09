@@ -3,7 +3,7 @@ import { Box, Chip, Grid } from '@material-ui/core';
 import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
 import QRCode from 'react-qr-code';
 
-export const ViewNymPassport: React.FC = () => (
+export const ViewNymId: React.FC = () => (
   <Grid
     flexDirection="column"
     justifyContent="center"
@@ -11,7 +11,7 @@ export const ViewNymPassport: React.FC = () => (
     mt={5}
     px={2}
   >
-    <h2>Nym Passport</h2>
+    <h2>Nym Id</h2>
     <Box>
       <Chip
         icon={<BeenhereOutlinedIcon />}

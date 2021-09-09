@@ -4,12 +4,12 @@ import {
   ViewCovidPassRoutes,
   ViewCovidPassUrlPaths as covidPass,
 } from './CovidPass';
-import { ViewNymPassport } from './NymPassport';
+import { ViewNymId } from './NymId';
 
 export const ViewItemUrlPaths = {
   home: '/user/app/view',
   covidPass,
-  nymPassport: '/user/app/view/nym-passport',
+  nymId: '/user/app/view/nym-id',
 };
 
 export const ViewItemRoutes: React.FC = () => (
@@ -17,8 +17,8 @@ export const ViewItemRoutes: React.FC = () => (
     <Route path={ViewItemUrlPaths.covidPass.home}>
       <ViewCovidPassRoutes />
     </Route>
-    <Route exact path={ViewItemUrlPaths.nymPassport}>
-      <ViewNymPassport />
+    <Route exact path={ViewItemUrlPaths.nymId}>
+      <ViewNymId />
     </Route>
   </Switch>
 );

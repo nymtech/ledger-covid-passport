@@ -44,7 +44,7 @@ export const NavAwareDocs: React.FC = () => {
       <Route exact path={routes.user.app.add.covidPass}>
         <RoutesUserAppAddCovidPass components={components} />
       </Route>
-      <Route exact path={routes.user.app.view.nymPassport}>
+      <Route exact path={routes.user.app.view.nymId}>
         <RoutesUserAppViewNymPassport components={components} />
       </Route>
       <Route exact path={routes.user.app.view.covidPass.home}>

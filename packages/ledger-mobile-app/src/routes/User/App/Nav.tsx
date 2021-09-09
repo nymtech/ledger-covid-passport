@@ -111,7 +111,7 @@ export const AppNav: React.FC = () => {
             label="Nym Passport"
             icon={<EmojiPeopleIcon />}
             component={Link}
-            to={routes.user.app.view.nymPassport}
+            to={routes.user.app.view.nymId}
             onClick={() => setOpen(false)}
           />
           <BottomNavigationAction
