@@ -3,15 +3,25 @@ import { Chip } from '@material-ui/core';
 import WarningOutlinedIcon from '@material-ui/icons/WarningOutlined';
 import { DateTime } from 'luxon';
 import BeenhereOutlinedIcon from '@material-ui/icons/BeenhereOutlined';
-import { HCertWrapper } from '../../models/hcert';
+import {
+  HCertWrapper,
+  isHCertWrapperVaccinationRecord,
+} from '../../models/hcert';
 
 interface HCertValidityProps {
   wrapper?: HCertWrapper;
 }
 
 export const HCertValidity: React.FC<HCertValidityProps> = ({ wrapper }) => {
-  if (!wrapper) {
-    return null;
+  if (!wrapper || !isHCertWrapperVaccinationRecord(wrapper)) {
+    return (
+      <Chip
+        icon={<WarningOutlinedIcon />}
+        label="No valid vaccination certificate"
+        color="error"
+        sx={{ p: 1 }}
+      />
+    );
   }
 
   const date = DateTime.fromJSDate(wrapper.exp);

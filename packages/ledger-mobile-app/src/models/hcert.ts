@@ -122,3 +122,16 @@ export const isHCertWrapper = (json: any): json is HCertWrapper => {
   }
   return 'iss' in json && 'exp' in json && 'iat' in json;
 };
+
+export const isHCertWrapperVaccinationRecord = (
+  json: any,
+): json is HCertWrapper => {
+  if (!isHCertWrapper(json)) {
+    return false;
+  }
+  return (
+    json.hcert?.iss?.v &&
+    Array.isArray(json.hcert.iss.v) &&
+    json.hcert.iss.v.length > 0
+  );
+};

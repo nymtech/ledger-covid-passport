@@ -18,7 +18,10 @@ import { useAppState } from '../../../components/StateProvider';
 import { useIsMounted } from '../../../hooks/useIsMounted';
 import { routes } from '../../../Routes';
 import { decodeCovidCertificateAndValidate } from '../../../utils/covid-certificate-decoder';
-import { HCertWrapper } from '../../../models/hcert';
+import {
+  HCertWrapper,
+  isHCertWrapperVaccinationRecord,
+} from '../../../models/hcert';
 import { HealthCertificate } from '../../../components/HealthCertificate';
 import { HCertValidity } from '../../../components/HealthCertificate/HCertValidity';
 
@@ -32,6 +35,8 @@ export const AddCovidPass: React.FC = () => {
   const [error, setError] = React.useState<Error>();
   const history = useHistory();
   const isMounted = useIsMounted();
+  const isCertificateParsed =
+    certificate && isHCertWrapperVaccinationRecord(certificate);
 
   React.useEffect(() => {
     if (value) {
@@ -60,7 +65,7 @@ export const AddCovidPass: React.FC = () => {
       </Box>
 
       {!certificate && <h2 style={{ width: '100%' }}>Scan a QR code</h2>}
-      {certificate && (
+      {isCertificateParsed && (
         <Box my={2}>
           <Button
             sx={{ p: 2 }}
@@ -127,7 +132,7 @@ export const AddCovidPass: React.FC = () => {
             width="100%"
             mb={2}
           >
-            <HCertValidity wrapper={certificate} />
+            {isCertificateParsed && <HCertValidity wrapper={certificate} />}
           </Grid>
           <HealthCertificate wrapper={certificate} />
         </Box>
