@@ -52,7 +52,6 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()],
     alias: {
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
-      cbor: require.resolve('cbor-web'),
       // fs: 'empty', // see https://mdxjs.com/getting-started/webpack
     },
   },

@@ -30,7 +30,7 @@ export const HCertValidity: React.FC<HCertValidityProps> = ({ wrapper }) => {
     return (
       <Chip
         icon={<WarningOutlinedIcon />}
-        label={`Expired on ${date.toFormat('ccc dd MMM yyyy')}`}
+        label={`Expired on ${date.toFormat('dd MMM yyyy')}`}
         color="error"
         sx={{ p: 1 }}
       />
@@ -40,7 +40,7 @@ export const HCertValidity: React.FC<HCertValidityProps> = ({ wrapper }) => {
   return (
     <Chip
       icon={<BeenhereOutlinedIcon />}
-      label={`Valid until ${date.toFormat('ccc dd MMM yyyy')}`}
+      label={`Valid until ${date.toFormat('dd MMM yyyy')}`}
       color="success"
       sx={{ p: 1 }}
     />

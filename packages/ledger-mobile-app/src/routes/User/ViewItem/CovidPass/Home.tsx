@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Box, Button, FormControlLabel, Grid, Switch } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Grid,
+  Switch,
+  Typography,
+} from '@material-ui/core';
 import QRCode from 'react-qr-code';
 import { Link } from 'react-router-dom';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
@@ -19,6 +26,9 @@ export const ViewCovidPassHome: React.FC = () => {
       px={2}
     >
       <h2>Private COVID Certificate</h2>
+      <Box mt={3} mb={3}>
+        You have downloaded a COVID certificate into your wallet.
+      </Box>
       <Box>
         <HCertValidity wrapper={state.hcert} />
         <Button
@@ -26,39 +36,25 @@ export const ViewCovidPassHome: React.FC = () => {
           to={routes.user.app.view.covidPass.reveal}
           component={Link}
         >
-          <VisibilityOutlinedIcon sx={{ mr: 1 }} />
+          View
           <KeyboardArrowRightIcon />
         </Button>
       </Box>
 
-      <Box mt={2}>
-        You can control the information by only disclosing a subset of fields
-        from your COVID certificate:
-      </Box>
-      <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        mt={2}
-        width="100%"
+      <Typography
+        mt={8}
+        mb={3}
+        fontWeight="bold"
+        fontSize="larger"
+        textAlign="center"
       >
-        <Box>
-          <Button
-            variant="contained"
-            to={routes.user.app.view.covidPass.newCustom}
-            component={Link}
-            sx={{ py: 2 }}
-          >
-            Create private certificate <KeyboardArrowRightIcon />
-          </Button>
-        </Box>
-      </Grid>
+        Show your Private COVID Certificate to a verifier
+      </Typography>
 
-      <Box mt={8}>
-        Or you can scan a QR code from the verifier to provide the information
-        they would like to see. You will be given a chance to confirm before
-        disclosing information:
+      <Box>
+        Scan a QR code from the verifier to provide the information they would
+        like to see. You will be given a chance to confirm before disclosing
+        information:
       </Box>
       <Grid
         container

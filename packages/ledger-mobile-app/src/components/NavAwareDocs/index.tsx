@@ -8,8 +8,7 @@ const {
   RoutesUserHome,
   RoutesUserSplash,
   RoutesUserOnboardingHome,
-  RoutesUserOnboardingOnboardingUpload,
-  RoutesUserOnboardingOnboardingUploadWait,
+  RoutesUserOnboardingAuth,
   RoutesUserAppAddCovidPass,
   RoutesUserAppViewNymPassport,
   RoutesUserAppViewCovidPassHome,
@@ -35,11 +34,14 @@ export const NavAwareDocs: React.FC = () => {
       <Route exact path={routes.user.onboarding.home}>
         <RoutesUserOnboardingHome components={components} />
       </Route>
-      <Route exact path={routes.user.onboarding.onboardingUpload}>
-        <RoutesUserOnboardingOnboardingUpload components={components} />
+      <Route exact path={routes.user.onboarding.onboardingAuthStart}>
+        <RoutesUserOnboardingAuth components={components} />
       </Route>
-      <Route exact path={routes.user.onboarding.onboardingUploadWait}>
-        <RoutesUserOnboardingOnboardingUploadWait components={components} />
+      <Route exact path={routes.user.onboarding.onboardingAuthPleaseWait}>
+        <RoutesUserOnboardingAuth components={components} />
+      </Route>
+      <Route exact path={routes.user.onboarding.onboardingAuthDone}>
+        <RoutesUserOnboardingAuth components={components} />
       </Route>
       <Route exact path={routes.user.app.view.nymId}>
         <RoutesUserAppViewNymPassport components={components} />

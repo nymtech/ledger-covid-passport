@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import * as React from 'react';
 import { HCertWrapper } from '../../models/hcert';
+import { fakeHCert } from './fakeData';
 
 export type AppMode = 'patient' | 'verifier';
 
@@ -19,6 +20,7 @@ export interface State extends StateData {
 
 const defaultValue: State = {
   mode: 'patient',
+  hcert: fakeHCert,
   setMode: () => undefined,
   setQRCode: () => undefined,
   setHCert: () => undefined,

@@ -44,7 +44,9 @@ const SplashScreen: React.FC = () => (
       <br />
       Private
       <br />
-      Identity
+      COVID
+      <br />
+      Certificate
       <br />
       App
     </Typography>
