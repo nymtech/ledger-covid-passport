@@ -36,7 +36,9 @@ export const HomePage: FC = () => (
             </Box>
           </Link>
           <p>
-          The End User in Nym PCC is someone who has received two doses of COVID-19 vaccine, or had previously been affected and has now tested negative.
+            The End User in Nym PCC is someone who has received two doses of
+            COVID-19 vaccine, or had previously been affected and has now tested
+            negative.
           </p>
         </Item>
       </Grid>
@@ -52,15 +54,11 @@ export const HomePage: FC = () => (
             </Box>
           </Link>
           <p>
-          The Verifier in this system is someone who needs to check the End User's digital certificate (credential). The Verifier can be a border officer, the security at a restaurant, etc.
+            The Verifier in this system is someone who needs to check the End
+            User's digital certificate (credential). The Verifier can be a
+            border officer, the security at a restaurant, etc.
           </p>
         </Item>
-      </Grid>
-      <Grid item xs={12}>
-        <Box pt={4}>
-          Because this is still in development, you might need to use some of
-          our <Link to={routes.debug.home}>debugging tools</Link>.
-        </Box>
       </Grid>
     </Grid>
   </Container>
