@@ -35,11 +35,11 @@ export const AuthDone: React.FC = () => {
       <Box mt={3}>
         <Button
           variant="contained"
-          to={routes.user.app.home}
+          to={routes.user.app.view.covidPass.reveal}
           component={Link}
           sx={{ ml: 1, py: 2 }}
         >
-          Go to your wallet
+          View COVID certificate
           <KeyboardArrowRightIcon />
         </Button>
       </Box>
