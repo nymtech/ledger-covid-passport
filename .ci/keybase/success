@@ -1,0 +1,11 @@
+🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩
+> :rocket: {{ env.NYM_PROJECT_NAME }}  ➡️➡️➡️➡️➡️ **View output:** https://{{ env.CI_PREFIX }}.{{ env.NYM_CI_WWW_BASE }}/
+> ✅ **SUCCESS**
+> `branch` {{ env.CI_PROJECT_URL }}/tree/{{ env.CI_COMMIT_BRANCH }}
+> `commit` {{ env.CI_PROJECT_URL }}/commit/{{ env.CI_COMMIT_SHA }}
+> `build ` {{ env.CI_JOB_URL }}
+
+Commit message:
+```
+{{ env.CI_COMMIT_TITLE }}
+```

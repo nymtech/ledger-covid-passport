@@ -1,0 +1,69 @@
+# see https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Ruby.gitlab-ci.yml
+
+image: node:14
+
+variables:
+  CI_SERVER_HOST: www.ci.nymte.ch
+  CI_SERVER_COMPONENT_NAME: nym-pcc
+  CI_SERVER_USERNAME: gitlab
+  CI_SERVER_DIR: /var/www/branches
+
+  NYM_PROJECT_NAME: "Private COVID Passport"
+  NYM_CI_WWW_BASE: ci.nymte.ch
+
+  KEYBASE_NYMBOT_USERNAME: nymbot
+  KEYBASE_NYM_CHANNEL: ci-nym-pcc
+
+build-job:
+  stage: build
+  tags:
+    - docker # tag this job with 'docker' so that it runs on gitlab runners with docker
+  script:
+    - cd packages/ledger-mobile-app
+    - npm i
+    - npm run build
+  after_script:
+    - echo "CI_JOB_STATUS=$CI_JOB_STATUS" >> build.env
+  artifacts:
+    # these paths will be available in other stages
+    paths:
+      - packages/ledger-mobile-app/dist/
+    expire_in: 1 hour
+    reports:
+      # export environment to other stages
+      dotenv: build.env
+
+deploy-prod:
+  stage: deploy
+  image: instrumentisto/rsync-ssh
+  tags:
+    - docker # tag this job with 'docker' so that it runs on gitlab runners with docker
+  before_script:
+    - eval $(ssh-agent -s)
+    - echo "$CI_WWW_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    # make branch name a slug using https://gist.github.com/oneohthree/f528c7ae1e701ad990e6
+    - export CI_COMMIT_BRANCH_SLUG=$(echo "$CI_COMMIT_BRANCH" | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)
+    - echo "This job deploys something from the $CI_COMMIT_BRANCH branch to $CI_SERVER_HOST/$CI_SERVER_COMPONENT_NAME/$CI_COMMIT_BRANCH_SLUG with user $CI_SERVER_USERNAME..."
+    - export DEST_DIR="$CI_SERVER_DIR/$CI_SERVER_COMPONENT_NAME-$CI_COMMIT_BRANCH_SLUG"
+    - rsync -avrc "$PWD/packages/ledger-mobile-app/dist/" $CI_SERVER_USERNAME@$CI_SERVER_HOST:$DEST_DIR
+
+keybase-notifications:
+  when: always # run even if other jobs fail
+  stage: .post
+  image: keybaseio/client:stable-node
+  tags:
+    - docker # tag this job with 'docker' so that it runs on gitlab runners with docker
+  script:
+    - env
+    # ===== make branch name a slug using https://gist.github.com/oneohthree/f528c7ae1e701ad990e6
+    - export CI_COMMIT_BRANCH_SLUG=$(echo "$CI_COMMIT_BRANCH" | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z)
+    - export CI_PREFIX="$CI_SERVER_COMPONENT_NAME-$CI_COMMIT_BRANCH_SLUG"
+    # ===== install packages
+    - cd .ci/keybase
+    - npm install
+    # ===== send keybase notification using keybase node package and keybase client in docker image
+    - node send_message.js
