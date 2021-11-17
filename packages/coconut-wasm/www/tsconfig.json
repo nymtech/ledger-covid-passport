@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "moduleResolution": "node",
+    "outDir": "./dist/",
+    "module": "esnext",
+    "jsx": "react",
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "webpack.*",
+    "jest.*"
+  ]
+}
