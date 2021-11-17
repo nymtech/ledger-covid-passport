@@ -25,8 +25,7 @@ export const ViewCovidPassHome: React.FC = () => {
       mt={5}
       px={2}
     >
-      <h2>Private COVID Certificate</h2>
-      <Box mt={3} mb={3}>
+      <Box mt={6} mb={3}>
         You have downloaded a COVID certificate into your wallet.
       </Box>
       <Box>

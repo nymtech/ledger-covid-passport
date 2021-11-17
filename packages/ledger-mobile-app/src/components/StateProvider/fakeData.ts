@@ -1,8 +1,9 @@
 import { HCertWrapper } from '../../models/hcert';
 
 // https://github.com/ehn-dcc-development/ehn-dcc-schema/blob/release/1.3.0/examples/vaccination/simple.json
-export const fakeHCert: HCertWrapper = [
-  JSON.parse(`{
+export const getFakeHCert = (): HCertWrapper => {
+  const value: HCertWrapper = [
+    JSON.parse(`{
   "iss": "NL",
   "exp": "2022-06-25T10:50:31.000Z",
   "iat": "2021-05-26T10:50:31.000Z",
@@ -33,8 +34,16 @@ export const fakeHCert: HCertWrapper = [
     }
   }
 }`),
-].map<HCertWrapper>((i: any) => ({
-  ...(i as HCertWrapper),
-  exp: new Date(Date.parse(i.exp)),
-  iat: new Date(Date.parse(i.iat)),
-}))[0];
+  ].map<HCertWrapper>((i: any) => ({
+    ...(i as HCertWrapper),
+    exp: new Date(Date.parse(i.exp)),
+    iat: new Date(Date.parse(i.iat)),
+  }))[0];
+
+  const now = new Date();
+  value.hcert.iss.dob = `${now.getFullYear() - 19}-01-01`; // set age to 19 years always
+
+  return value;
+};
+
+export const fakeHCert: HCertWrapper = getFakeHCert();

@@ -1,6 +1,6 @@
 # see https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Ruby.gitlab-ci.yml
 
-image: node:14
+image: node:16
 
 variables:
   CI_SERVER_HOST: www.ci.nymte.ch

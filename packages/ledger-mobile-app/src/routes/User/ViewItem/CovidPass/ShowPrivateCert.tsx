@@ -1,15 +1,91 @@
 import * as React from 'react';
-import { Box, Button, Grid } from '@material-ui/core';
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Button,
+  CircularProgress,
+  Grid,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import QRCode from 'react-qr-code';
 import { routes } from '../../../../Routes';
-
-const randomValue = () =>
-  [1, 2, 3, 4, 5, 6, 7, 8].map(() => `${Math.random()}`).join('\n');
+import { useCoconutState } from '../../../../state';
 
 export const CovidPassShowPrivate: React.FC = () => {
-  const [value, setValue] = React.useState(randomValue());
+  const state = useCoconutState();
+  const [busy, setBusy] = React.useState<boolean>(false);
+
+  const randomiseCredential = React.useCallback(() => {
+    setBusy(true);
+    setTimeout(() => {
+      (async () => {
+        const userShowDataBase58 = await state.app.show_coconut_credential(
+          state.verifierAttributes,
+        );
+        state.setUserShowDataBase58(userShowDataBase58);
+        setBusy(false);
+      })();
+    }, 100);
+  }, [state]);
+
+  React.useEffect(() => {
+    if (
+      !state.userShowDataBase58 &&
+      state.signatureWithShares &&
+      state.verifierAttributes &&
+      state.verifierPolicy
+    ) {
+      randomiseCredential();
+    }
+  }, [
+    state.verifierAttributes,
+    state.verifierPolicy,
+    state.userShowDataBase58,
+  ]);
+
+  if (
+    !state.signatureWithShares ||
+    !state.verifierAttributes ||
+    !state.verifierPolicy
+  ) {
+    return (
+      <Grid
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        mt={5}
+        px={2}
+      >
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          <p>
+            Something seems to have gone wrong. Please go back and try again.
+          </p>
+        </Alert>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          mt={6}
+          width="100%"
+        >
+          <Button
+            variant="contained"
+            to={routes.user.app.home}
+            component={Link}
+            sx={{ mx: 1, py: 2 }}
+          >
+            <KeyboardArrowLeftIcon /> Back
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
     <Grid
       flexDirection="column"
@@ -27,15 +103,35 @@ export const CovidPassShowPrivate: React.FC = () => {
       </Button>
       <h2>Your Private COVID Pass</h2>
       <Box my={5}>
-        <QRCode value={value} />
+        {!state.userShowDataBase58 && (
+          <Grid display="flex" alignItems="center" my={10}>
+            <div>
+              <CircularProgress color="inherit" size={25} sx={{ mr: 2 }} />
+            </div>
+            <div>Please wait...</div>
+          </Grid>
+        )}
+        {state.userShowDataBase58 && (
+          <QRCode value={state.userShowDataBase58} />
+        )}
       </Box>
-      <Button
-        variant="contained"
-        sx={{ mt: 2 }}
-        onClick={() => setValue(randomValue())}
-      >
-        Re-randomize
-      </Button>
+      {state.userShowDataBase58 && (
+        <Button
+          variant="contained"
+          sx={{ mt: 2, height: 50 }}
+          onClick={randomiseCredential}
+          disabled={busy}
+        >
+          {busy ? (
+            <>
+              <CircularProgress color="inherit" size={25} sx={{ mr: 2 }} />
+              Please wait
+            </>
+          ) : (
+            'Re-randomise'
+          )}
+        </Button>
+      )}
     </Grid>
   );
 };

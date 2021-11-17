@@ -9,12 +9,11 @@ const WebpackFavicons = require('webpack-favicons');
 module.exports = {
   entry: {
     index: {
-      import: './src/index.tsx',
-      dependOn: 'content',
+      import: './src/bootstrap.ts',
     },
-    content: {
-      import: './src/content/index.js',
-    },
+    // content: {
+    //   import: './src/content/index.js',
+    // },
   },
   module: {
     rules: [
@@ -48,7 +47,7 @@ module.exports = {
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
     },
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.wasm'],
     plugins: [new TsconfigPathsPlugin()],
     alias: {
       'react/jsx-runtime': require.resolve('react/jsx-runtime'),
@@ -84,5 +83,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
+  },
+  experiments: {
+    syncWebAssembly: true,
   },
 };

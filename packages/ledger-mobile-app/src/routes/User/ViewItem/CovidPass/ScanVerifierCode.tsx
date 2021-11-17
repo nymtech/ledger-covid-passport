@@ -5,9 +5,33 @@ import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../../../Routes';
 import { ScanQRCode } from '../../../../components/ScanQRCode';
+import { useCoconutState } from '../../../../state';
+import { useVerifierState } from '../../../../state/verifier';
 
 export const CovidPassScanVerifier: React.FC = () => {
   const history = useHistory();
+  const state = useCoconutState();
+  const verifierState = useVerifierState();
+  const handleSkip = React.useCallback(() => {
+    const attr = {
+      verifier_id: '1234',
+      timestamp: new Date().toISOString(),
+    };
+    const policy = {
+      is_vaccinated: true,
+      is_over_18: true,
+      is_over_21: false,
+    };
+    // set the state for the user app
+    state.setVerifierAttributes(attr);
+    state.setVerifierPolicy(policy);
+
+    // set the same state for the verifier app, because it never produced the QR-code in the first place
+    verifierState.setVerifierAttributes(attr);
+    verifierState.setVerifierPolicy(policy);
+
+    history.push(routes.user.app.view.covidPass.confirmVerifierCode);
+  }, [state]);
   return (
     <Grid
       flexDirection="column"
@@ -33,11 +57,7 @@ export const CovidPassScanVerifier: React.FC = () => {
           </Button>
         </div>
         <div>
-          <Button
-            sx={{ mx: 0, p: 0 }}
-            to={routes.user.app.view.covidPass.confirmVerifierCode}
-            component={Link}
-          >
+          <Button sx={{ mx: 0, p: 0 }} onClick={handleSkip}>
             Skip <KeyboardArrowRightIcon />
           </Button>
         </div>

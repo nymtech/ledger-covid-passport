@@ -5,9 +5,42 @@ import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { ScanQRCode } from '../../../components/ScanQRCode';
 import { routes } from '../../../Routes';
+import { useVerifierState } from '../../../state/verifier';
+import { useCoconutState } from '../../../state';
 
 export const ScanUserQrCode: React.FC = () => {
   const history = useHistory();
+  const coconutState = useCoconutState();
+  const state = useVerifierState();
+
+  const handleSkip = () => {
+    if (!coconutState.userShowDataBase58) {
+      history.push(routes.user.app.home);
+      return;
+    }
+    if (!state.verifierAttributes || !state.verifierPolicy) {
+      history.push(routes.verifier.home);
+      return;
+    }
+
+    (async () => {
+      if (
+        !coconutState.userShowDataBase58 ||
+        !state.verifierPolicy ||
+        !state.verifierAttributes
+      ) {
+        return;
+      }
+      const result = await coconutState.app.verify_coconut_credential(
+        state.verifierPolicy,
+        state.verifierAttributes,
+        coconutState.userShowDataBase58,
+      );
+      state.setVerifyResult(result);
+      history.push(routes.verifier.validateSuccess);
+    })();
+  };
+
   return (
     <Grid
       flexDirection="column"
@@ -33,11 +66,7 @@ export const ScanUserQrCode: React.FC = () => {
           </Button>
         </div>
         <div>
-          <Button
-            sx={{ mx: 0, p: 0 }}
-            to={routes.verifier.validateSuccess}
-            component={Link}
-          >
+          <Button sx={{ mx: 0, p: 0 }} onClick={handleSkip}>
             Skip <KeyboardArrowRightIcon />
           </Button>
         </div>

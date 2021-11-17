@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
   Grid,
@@ -14,12 +16,50 @@ import { Link, useHistory } from 'react-router-dom';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import BeenhereIcon from '@material-ui/icons/BeenhereOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../../Routes';
+import { useVerifierState } from '../../../state/verifier';
 
 export const ValidateSuccess: React.FC = () => {
-  const history = useHistory();
   const theme = useTheme();
+  const state = useVerifierState();
+
+  if (!state.verifyResult || !state.verifierPolicy) {
+    return (
+      <Grid
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        mt={5}
+        px={2}
+      >
+        <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          <p>There are no verification results, please try again.</p>
+        </Alert>
+
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          mt={6}
+          width="100%"
+        >
+          <Button
+            variant="contained"
+            to={routes.verifier.validate}
+            component={Link}
+            sx={{ mx: 1, py: 2 }}
+          >
+            <KeyboardArrowLeftIcon /> Back
+          </Button>
+        </Grid>
+      </Grid>
+    );
+  }
+
   return (
     <Grid
       flexDirection="column"
@@ -50,38 +90,62 @@ export const ValidateSuccess: React.FC = () => {
         sx={{
           p: 2,
           color: theme.palette.common.white,
-          background: theme.palette.success.light,
+          background: state.verifyResult.result
+            ? theme.palette.success.light
+            : theme.palette.error.light,
         }}
       >
         <div>
           <BeenhereIcon />
         </div>
         <Box fontSize="large" fontWeight="400">
-          The user has presented a valid certificate
+          {state.verifyResult.result === true
+            ? 'The user has presented a valid certificate'
+            : 'The certificate failed to meet the policy requirements'}
         </Box>
       </Paper>
       <Box mt={4} mb={2}>
-        It also confirms the following
+        {state.verifyResult.result === true
+          ? 'It also confirms the following'
+          : 'The policy requirements that were failed were'}
       </Box>
       <List>
         <ListItem>
           <ListItemIcon>
-            <CheckBoxOutlinedIcon />
+            {state.verifierPolicy.is_vaccinated ? (
+              <CheckBoxOutlinedIcon />
+            ) : (
+              <CheckBoxOutlineBlankIcon />
+            )}
           </ListItemIcon>
           <ListItemText primary="COVID certificate is valid" />
         </ListItem>
         <ListItem>
           <ListItemIcon>
-            <CheckBoxOutlinedIcon />
+            {state.verifierPolicy.is_vaccinated ? (
+              <CheckBoxOutlinedIcon />
+            ) : (
+              <CheckBoxOutlineBlankIcon />
+            )}
           </ListItemIcon>
           <ListItemText primary="2x vaccinations" />
         </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <CheckBoxOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Over 18 years old" />
-        </ListItem>
+        {state.verifierPolicy.is_over_18 && !state.verifierPolicy.is_over_21 && (
+          <ListItem>
+            <ListItemIcon>
+              <CheckBoxOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Over 18 years old" />
+          </ListItem>
+        )}
+        {state.verifierPolicy.is_over_21 && (
+          <ListItem>
+            <ListItemIcon>
+              <CheckBoxOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Over 21 years old" />
+          </ListItem>
+        )}
       </List>
       <Grid
         container

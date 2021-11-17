@@ -12,9 +12,7 @@ module.exports = mergeWithRules({
   },
 })(commonConfig, {
   mode: 'production',
-
-  // TODO: no source maps, add back
-  devtool: false,
+  devtool: 'source-map',
 
   module: {
     rules: [
