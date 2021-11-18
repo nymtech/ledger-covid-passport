@@ -107,7 +107,7 @@ export var NavAwareStateViewer: React.FC = function () {
     }
   };
   return (
-    <Box padding={2} sx={{ overflowY: 'auto', overflowX: 'auto', maxHeight: '75vh' }}>
+    <Box padding={2} sx={{ overflowY: 'auto', overflowX: 'auto', maxHeight: '75vh', borderTop: '1px solid rgba(0, 0, 0, 0.1)' }}>
       <Diagram onHover={handleHover} popoverChildren={popover} />
     </Box>
   );

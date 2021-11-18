@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export const HomePage: FC = () => (
   <Container>
-    <NavAwareDocs />
+    <NavAwareDocs fixedHeight={false} />
 
     <Grid container spacing={2}>
       <Grid item xs={12} sm={6}>

@@ -21,7 +21,7 @@ export const VerifierContainer: React.FC = ({ children }) => {
           width: '600px',
         }}
       >
-        <Box sx={{ p: 4 }}>{children}</Box>
+        <Box sx={{ p: 4, overflowY: 'auto', height: '100%' }}>{children}</Box>
       </Box>
       <Box
         sx={{
