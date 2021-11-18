@@ -18,6 +18,7 @@ import BeenhereIcon from '@material-ui/icons/BeenhereOutlined';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import ErrorIcon from '@material-ui/icons/Error';
 import { routes } from '../../../Routes';
 import { useVerifierState } from '../../../state/verifier';
 
@@ -85,7 +86,7 @@ export const ValidateSuccess: React.FC = () => {
           </Button>
         </div>
       </Grid>
-      <h2>Success</h2>
+      { state.verifyResult.result === true ? (<h2>Success</h2>) : (<h2>Failed to verify</h2>) }
       <Paper
         sx={{
           p: 2,
@@ -96,7 +97,7 @@ export const ValidateSuccess: React.FC = () => {
         }}
       >
         <div>
-          <BeenhereIcon />
+          { state.verifyResult.result === true ? (<BeenhereIcon />) : (<ErrorIcon/>) }
         </div>
         <Box fontSize="large" fontWeight="400">
           {state.verifyResult.result === true
