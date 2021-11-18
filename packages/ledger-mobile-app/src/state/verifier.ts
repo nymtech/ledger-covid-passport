@@ -17,6 +17,15 @@ interface VerifierState {
 }
 
 export const useVerifierState = create<VerifierState>((set) => ({
+  verifierAttributes: {
+    verifier_id: '1234',
+    timestamp: new Date().toISOString(),
+  },
+  verifierPolicy: {
+    is_vaccinated: true,
+    is_over_18: true,
+    is_over_21: false,
+  },
   setVerifierPolicy: (value: VerifierAccessControlPolicy) =>
     set(
       produce<VerifierState>((state) => {

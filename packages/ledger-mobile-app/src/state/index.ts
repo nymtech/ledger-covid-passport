@@ -67,6 +67,15 @@ export const useCoconutState = create<CoconutState>((set) => ({
     'https://pcc-validator2.ci.nymte.ch/api',
     'https://pcc-validator3.ci.nymte.ch/api',
   ]),
+  verifierAttributes: {
+    verifier_id: '1234',
+    timestamp: new Date().toISOString(),
+  },
+  verifierPolicy: {
+    is_vaccinated: true,
+    is_over_18: true,
+    is_over_21: false,
+  },
   setValidatorKeys: (validatorKeys: ValidatorKeys) =>
     set(
       produce<CoconutState>((state) => {
