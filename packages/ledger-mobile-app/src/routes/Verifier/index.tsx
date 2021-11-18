@@ -5,6 +5,7 @@ import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../Routes';
 import { VerifierLayout as Layout } from '../../layouts/DefaultLayout';
 import { useVerifierState } from '../../state/verifier';
+import { useCoconutState } from '../../state';
 
 export const VerifierUrlPaths = {
   home: '/verifier',
@@ -12,6 +13,7 @@ export const VerifierUrlPaths = {
 
 export const VerifierRoutes: React.FC = () => {
   const state = useVerifierState();
+  const coconutState = useCoconutState();
   return (
     <Layout>
       <Switch>
@@ -27,33 +29,17 @@ export const VerifierRoutes: React.FC = () => {
               Certificate
             </Typography>
 
-            <Grid
-              container
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-            >
-              {state.verifierPolicy && state.verifierAttributes ? (
-                <Button
-                  variant="contained"
-                  to={routes.verifier.scanQRCode}
-                  component={Link}
-                  sx={{ py: 2, mt: 3 }}
-                >
+            <Grid container direction="column" justifyContent="center" alignItems="center">
+              {state.verifierPolicy && state.verifierAttributes && coconutState.userShowDataBase58 && (
+                <Button variant="contained" to={routes.verifier.scanQRCode} component={Link} sx={{ py: 2, mt: 3 }}>
                   Verify PCC
                   <KeyboardArrowRightIcon />
                 </Button>
-              ) : (
-                <Button
-                  variant="contained"
-                  to={routes.verifier.validate}
-                  component={Link}
-                  sx={{ py: 2, mt: 3 }}
-                >
-                  Start
-                  <KeyboardArrowRightIcon />
-                </Button>
               )}
+              <Button variant="contained" to={routes.verifier.validate} component={Link} sx={{ py: 2, mt: 3 }}>
+                Choose a policy
+                <KeyboardArrowRightIcon />
+              </Button>
             </Grid>
           </Box>
         </Route>
