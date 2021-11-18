@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 import { VerifierLayout as Layout } from '../../../layouts/DefaultLayout';
-import { VerifierViewContainer } from '../../../components/VerifierViewContainer';
 import { VerifierBottomNav } from '../../../components/Navs/VerifierBottomNav';
 
 export const ViewUrlPaths = {
@@ -32,7 +31,7 @@ export const ValidatorViewRoutes: React.FC = () => (
               height: '100%',
             }}
           >
-            <VerifierViewContainer />
+            Verifier view
           </Box>
           <VerifierBottomNav />
         </Box>

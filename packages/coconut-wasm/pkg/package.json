@@ -1,0 +1,16 @@
+{
+  "name": "coconut-wasm",
+  "collaborators": [
+    "Mark Sinclair <mmsinclair@gmail.com>"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "coconut_wasm_bg.wasm",
+    "coconut_wasm.js",
+    "coconut_wasm_bg.js",
+    "coconut_wasm.d.ts"
+  ],
+  "module": "coconut_wasm.js",
+  "types": "coconut_wasm.d.ts",
+  "sideEffects": false
+}

@@ -1,0 +1,22 @@
+[package]
+name = "coconut-cli"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = {version = "2", features = ["yaml"]}
+pretty_env_logger = "0.4.0"
+log = "0.4.14"
+url = "2.2"
+uuid = {version="0.8.2", features = ["v4"]}
+bls12_381 = { version = "0.5", default-features = false, features = ["pairings", "alloc", "experimental"] }
+tokio = { version = "1.4", features = ["full"] }
+bs58 = "0.4.0"
+itertools = "0.10.1"
+
+coconut-interface = { path = "../../external/nym/common/coconut-interface" }
+nymcoconut = { path = "../../external/nym/common/nymcoconut" }
+credentials = { path = "../../external/nym/common/credentials" }
+

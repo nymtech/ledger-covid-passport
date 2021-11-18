@@ -1,25 +1,30 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Onboarding } from './Onboarding';
-import { UploadId } from './UploadId';
-import { UploadPleaseWait } from './UploadPleaseWait';
+import { AuthStart } from './AuthStart';
+import { AuthWait } from './AuthWait';
+import { AuthDone } from './AuthDone';
 
 export const OnboardingUrlPaths = {
   home: '/user/onboarding',
-  onboardingUpload: '/user/onboarding/upload',
-  onboardingUploadWait: '/user/onboarding/wait',
+  onboardingAuthStart: '/user/onboarding/auth/start',
+  onboardingAuthPleaseWait: '/user/onboarding/auth/wait',
+  onboardingAuthDone: '/user/onboarding/auth/done',
 };
 
 export const OnboardingRoutes: React.FC = () => (
   <Switch>
-    <Route exact path={OnboardingUrlPaths.onboardingUpload}>
-      <UploadId />
+    <Route exact path={OnboardingUrlPaths.onboardingAuthStart}>
+      <AuthStart />
+    </Route>
+    <Route exact path={OnboardingUrlPaths.onboardingAuthPleaseWait}>
+      <AuthWait />
+    </Route>
+    <Route exact path={OnboardingUrlPaths.onboardingAuthDone}>
+      <AuthDone />
     </Route>
     <Route exact path={OnboardingUrlPaths.home}>
       <Onboarding />
-    </Route>
-    <Route exact path={OnboardingUrlPaths.onboardingUploadWait}>
-      <UploadPleaseWait />
     </Route>
   </Switch>
 );

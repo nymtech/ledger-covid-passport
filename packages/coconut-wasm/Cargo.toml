@@ -1,0 +1,55 @@
+[package]
+name = "coconut-wasm"
+version = "0.1.0"
+authors = ["Mark Sinclair <mmsinclair@gmail.com>"]
+edition = "2018"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+default = ["console_error_panic_hook"]
+
+[dependencies]
+wasm-bindgen = { version = "0.2.78", features = ["serde-serialize"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+wasm-bindgen-futures = "0.4.28"
+js-sys = "0.3.55"
+base64 = "0.13.0"
+sha2 = "0.9.3"
+digest = "0.9.0"
+rand = "0.8.3"
+url = "2.2"
+itertools = "0.10.1"
+bs58 = "0.4.0"
+bls12_381 = { version = "0.5", default-features = false, features = ["pairings", "alloc", "experimental"] }
+ts-rs = "6.0"
+chrono = { version = "0.4.19", features = [ "wasmbind"] }
+
+coconut-interface = { path = "../../external/nym/common/coconut-interface" }
+nymcoconut = { path = "../../external/nym/common/nymcoconut" }
+credentials = { path = "../../external/nym/common/credentials" }
+
+# The `console_error_panic_hook` crate provides better debugging of panics by
+# logging them with `console.error`. This is great for development, but requires
+# all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
+# code size when deploying.
+console_error_panic_hook = { version = "0.1.6", optional = true }
+
+# `wee_alloc` is a tiny allocator for wasm that is only ~1K in code size
+# compared to the default allocator's ~10K. It is slower than the default
+# allocator, however.
+#
+# Unfortunately, `wee_alloc` requires nightly Rust when targeting wasm for now.
+wee_alloc = { version = "0.4.5", optional = true }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.13"
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"
+
+[target.'cfg(target_env = "wasm32-unknown-unknown")'.dependencies]
+getrandom = {version="*", features = ["js"]}

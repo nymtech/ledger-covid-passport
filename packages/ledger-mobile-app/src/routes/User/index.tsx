@@ -6,7 +6,6 @@ import { routes } from '../../Routes';
 import { PatientLayout as Layout } from '../../layouts/DefaultLayout';
 import { OnboardingRoutes, OnboardingUrlPaths } from './Onboarding';
 import { AppRoutes, AppUrlPaths } from './App';
-import { AddItemUrlPaths } from './AddItem';
 import { ViewItemUrlPaths } from './ViewItem';
 
 export const UserUrlPaths = {
@@ -16,9 +15,6 @@ export const UserUrlPaths = {
   },
   app: {
     ...AppUrlPaths,
-    add: {
-      ...AddItemUrlPaths,
-    },
     view: {
       ...ViewItemUrlPaths,
     },
@@ -48,7 +44,9 @@ const SplashScreen: React.FC = () => (
       <br />
       Private
       <br />
-      Identity
+      COVID
+      <br />
+      Certificate
       <br />
       App
     </Typography>

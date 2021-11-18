@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   Box,
+  Button,
   Grid,
   ListItemIcon,
   ListItemText,
@@ -13,7 +14,9 @@ import DirectionsCarFilledOutlinedIcon from '@material-ui/icons/DirectionsCarFil
 import CreditCardOutlinedIcon from '@material-ui/icons/CreditCardOutlined';
 import AutoAwesomeOutlinedIcon from '@material-ui/icons/AutoAwesomeOutlined';
 import AssignmentIcon from '@material-ui/icons/AssignmentOutlined';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { Link } from 'react-router-dom';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import { routes } from '../../../Routes';
 
 export const AppHome: React.FC = () => (
@@ -67,6 +70,13 @@ export const AppHome: React.FC = () => (
           <ListItemText>Super Hero Id</ListItemText>
         </MenuItem>
       </MenuList>
+    </Box>
+    <Box mt={5}>
+      <Button variant="outlined" disabled sx={{ ml: 1, py: 2 }}>
+        <AddCircleOutlineIcon sx={{ mr: 1 }} />
+        Add new item to wallet
+        <KeyboardArrowRightIcon />
+      </Button>
     </Box>
   </Grid>
 );

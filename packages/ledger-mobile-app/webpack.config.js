@@ -49,6 +49,12 @@ module.exports = mergeWithRules({
       'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
     historyApiFallback: true,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
   },
 
   // recommended for faster rebuild

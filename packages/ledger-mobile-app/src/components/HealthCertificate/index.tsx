@@ -1,6 +1,18 @@
 import * as React from 'react';
-import { Box, Table, TableBody, TableCell, TableRow } from '@material-ui/core';
-import { HCert, HCertWrapper } from '../../models/hcert';
+import {
+  Alert,
+  AlertTitle,
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@material-ui/core';
+import {
+  HCert,
+  HCertWrapper,
+  isHCertWrapperVaccinationRecord,
+} from '../../models/hcert';
 import { valueSets } from '../../models/valuesets';
 
 interface HealthCertificateProps {
@@ -13,6 +25,20 @@ export const HealthCertificate: React.FC<HealthCertificateProps> = ({
   if (!wrapper) {
     return null;
   }
+
+  if (!isHCertWrapperVaccinationRecord(wrapper)) {
+    console.error('Unable to parse health certificate', { wrapper });
+    return (
+      <Alert severity="error" sx={{ mt: 2 }}>
+        <AlertTitle>
+          Oh no! Something is wrong with the health certificate
+        </AlertTitle>
+        We were unable to parse the vaccination record from the health
+        certificate.
+      </Alert>
+    );
+  }
+
   const cert = wrapper.hcert.iss;
   const vaccination = wrapper.hcert.iss.v[0];
   return (
