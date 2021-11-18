@@ -15,6 +15,12 @@ import QRCode from 'react-qr-code';
 import QrCodeScannerIcon from '@material-ui/icons/QrCodeScanner';
 import { routes } from '../../../Routes';
 import { useVerifierState } from '../../../state/verifier';
+import { VerifierAttributes, VerifierAccessControlPolicy } from 'coconut-wasm';
+
+export interface ValidatorQRCode {
+  verifierAttributes?: VerifierAttributes;
+  verifierPolicy?: VerifierAccessControlPolicy;
+}
 
 export const VerifierShowVerificationQRCode: React.FC = () => {
   const state = useVerifierState();
@@ -50,10 +56,12 @@ export const VerifierShowVerificationQRCode: React.FC = () => {
     };
   }, []);
 
-  const verifierQRCodeContents = JSON.stringify({
+  const contents: ValidatorQRCode = {
     verifierAttributes: state.verifierAttributes,
-    policy: state.verifierPolicy,
-  });
+    verifierPolicy: state.verifierPolicy,
+  };
+
+  const verifierQRCodeContents = JSON.stringify(contents);
 
   const randomizeVerifierAttributes = () => {
     state.setVerifierAttributes({

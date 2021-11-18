@@ -13,7 +13,7 @@ export const ScanUserQrCode: React.FC = () => {
   const coconutState = useCoconutState();
   const state = useVerifierState();
 
-  const handleSkip = () => {
+  const verify = () => {
     if (!coconutState.userShowDataBase58) {
       history.push(routes.user.app.home);
       return;
@@ -39,6 +39,10 @@ export const ScanUserQrCode: React.FC = () => {
       state.setVerifyResult(result);
       history.push(routes.verifier.validateSuccess);
     })();
+  };
+
+  const handleSkip = () => {
+    verify();
   };
 
   return (
@@ -73,7 +77,10 @@ export const ScanUserQrCode: React.FC = () => {
       </Grid>
       <h2>Scan QR Code</h2>
       <ScanQRCode
-        onSuccess={() => history.push(routes.verifier.validateSuccess)}
+        onSuccess={(value) => {
+          coconutState.setUserShowDataBase58(value);
+          history.push(routes.verifier.validateSuccess);
+        }}
       />
     </Grid>
   );

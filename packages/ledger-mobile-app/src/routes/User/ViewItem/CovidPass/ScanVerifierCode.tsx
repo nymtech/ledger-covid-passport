@@ -7,6 +7,7 @@ import { routes } from '../../../../Routes';
 import { ScanQRCode } from '../../../../components/ScanQRCode';
 import { useCoconutState } from '../../../../state';
 import { useVerifierState } from '../../../../state/verifier';
+import { ValidatorQRCode } from '../../../Verifier/Validate/ShowVerificationQRCode';
 
 export const CovidPassScanVerifier: React.FC = () => {
   const history = useHistory();
@@ -33,26 +34,10 @@ export const CovidPassScanVerifier: React.FC = () => {
     history.push(routes.user.app.view.covidPass.confirmVerifierCode);
   }, [state]);
   return (
-    <Grid
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      mt={5}
-      px={2}
-    >
-      <Grid
-        display="flex"
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="center"
-        width="100%"
-      >
+    <Grid flexDirection="column" justifyContent="center" alignItems="center" mt={5} px={2}>
+      <Grid display="flex" flexDirection="row" justifyContent="space-between" alignItems="center" width="100%">
         <div>
-          <Button
-            sx={{ mx: 0, p: 0 }}
-            to={routes.user.app.view.covidPass.home}
-            component={Link}
-          >
+          <Button sx={{ mx: 0, p: 0 }} to={routes.user.app.view.covidPass.home} component={Link}>
             <KeyboardArrowLeftIcon /> Back
           </Button>
         </div>
@@ -63,14 +48,18 @@ export const CovidPassScanVerifier: React.FC = () => {
         </div>
       </Grid>
       <h2>Scan Verifier Code</h2>
-      <Box mt={2}>
-        After scanning the verifier's code, you can choose to disclose
-        information to them:
-      </Box>
+      <Box mt={2}>After scanning the verifier QR-code, you can choose to disclose information to them:</Box>
       <ScanQRCode
-        onSuccess={() =>
-          history.push(routes.user.app.view.covidPass.confirmVerifierCode)
-        }
+        onSuccess={(value) => {
+          const parsed: ValidatorQRCode = JSON.parse(value);
+          if (parsed.verifierPolicy) {
+            state.setVerifierPolicy(parsed.verifierPolicy);
+          }
+          if (parsed.verifierAttributes) {
+            state.setVerifierAttributes(parsed.verifierAttributes);
+          }
+          history.push(routes.user.app.view.covidPass.confirmVerifierCode);
+        }}
       />
     </Grid>
   );
