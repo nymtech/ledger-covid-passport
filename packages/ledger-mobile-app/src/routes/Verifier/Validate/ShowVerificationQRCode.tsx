@@ -135,7 +135,9 @@ export const VerifierShowVerificationQRCode: React.FC = () => {
         justifyContent="center"
       >
         <QRCode value={verifierQRCodeContents} />
-        <LinearProgress variant="determinate" value={progress} sx={{ mt: 3 }} />
+        <Box mt={3} width="100%">
+          <LinearProgress variant="determinate" value={progress} sx={{ width: '100%'}} />
+        </Box>
       </Box>
       <Box mt={2}>
         <Alert severity="info">
