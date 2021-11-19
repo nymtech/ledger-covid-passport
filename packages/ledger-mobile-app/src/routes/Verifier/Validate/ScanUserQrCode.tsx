@@ -12,14 +12,21 @@ export const ScanUserQrCode: React.FC = () => {
   const history = useHistory();
   const coconutState = useCoconutState();
   const state = useVerifierState();
+  const [retry, setRetry] = React.useState(new Date().toISOString());
 
-  const verify = () => {
-    if (!coconutState.userShowDataBase58) {
-      history.push(routes.user.app.home);
-      return;
-    }
-    if (!state.verifierAttributes || !state.verifierPolicy) {
-      history.push(routes.verifier.home);
+  React.useEffect(() => {
+    // reset on mounting
+    coconutState.clearUserShowDataBase58();
+  }, []);
+
+  const verify = React.useCallback( () => {
+    if (!coconutState.userShowDataBase58 || !state.verifierAttributes || !state.verifierPolicy) {
+      console.warn('ScanUserQrCode: State is not set', {
+        userShowDataBase58: coconutState.userShowDataBase58,
+        verifierAttributes: state.verifierAttributes,
+        verifierPolicy: state.verifierPolicy,
+      });
+      setTimeout(() => setRetry(new Date().toISOString()), 500);
       return;
     }
 
@@ -29,6 +36,11 @@ export const ScanUserQrCode: React.FC = () => {
         !state.verifierPolicy ||
         !state.verifierAttributes
       ) {
+        console.warn('ScanUserQrCode: State is not set, before verifying credential', {
+          userShowDataBase58: coconutState.userShowDataBase58,
+          verifierAttributes: state.verifierAttributes,
+          verifierPolicy: state.verifierPolicy,
+        });
         return;
       }
       const result = await coconutState.app.verify_coconut_credential(
@@ -39,7 +51,12 @@ export const ScanUserQrCode: React.FC = () => {
       state.setVerifyResult(result);
       history.push(routes.verifier.validateSuccess);
     })();
-  };
+  }, [coconutState.userShowDataBase58, state.verifierAttributes, state.verifierPolicy]);
+
+  React.useEffect(() => {
+    console.info('Retrying...');
+    verify();
+  }, [retry]);
 
   const handleSkip = () => {
     verify();
