@@ -21,10 +21,12 @@ export const CovidPassShowPrivate: React.FC = () => {
     setBusy(true);
     setTimeout(() => {
       (async () => {
-        const userShowDataBase58 = await state.app.show_coconut_credential(
-          state.verifierAttributes,
-        );
-        state.setUserShowDataBase58(userShowDataBase58);
+        if(state.verifierAttributes) {
+          const userShowDataBase58 = await state.app.show_coconut_credential(
+            state.verifierAttributes,
+          );
+          state.setUserShowDataBase58(userShowDataBase58);
+        }
         setBusy(false);
       })();
     }, 100);

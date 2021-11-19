@@ -79,7 +79,7 @@ export const ScanUserQrCode: React.FC = () => {
       <ScanQRCode
         onSuccess={(value) => {
           coconutState.setUserShowDataBase58(value);
-          history.push(routes.verifier.validateSuccess);
+          verify();
         }}
       />
     </Grid>
