@@ -21,7 +21,12 @@ The mobile app uses the following key libraries:
   [React Material UI](https://material-ui.com/).
 - [HTML5 Audio and Video capture](https://www.html5rocks.com/en/tutorials/getusermedia/intro/) for device camera access.
 - Health certificate decoding libraries and forks from European Union's Digital Green Certificate efforts via the [European eHealth network](https://github.com/ehn-dcc-development).
-- [Tesseract.js](https://tesseract.projectnaptha.com/) and [`mrz`](https://www.npmjs.com/package/mrz), to OCR and decode the Machine Readable Zones of documents such as passports.
+
+The Coconut code is packaged as a WASM package using [`wasm-pack`](https://github.com/rustwasm/wasm-pack).
+
+Coconut credentials are issued and verified as follows:
+
+![coconut-issuance-msg](docs/pcc-sequence-chart.svg)
 
 ## Getting Started
 
@@ -34,6 +39,17 @@ Developers will need to do the following to get their environment set up:
 The correct version of NodeJS will be installed.
 
 3. `npm install`
+
+## Build Coconut WASM
+
+Make sure you have Rust and `wasm-pack` installed by following the instructions at:
+- https://rustup.rs/
+- https://rustwasm.github.io/wasm-pack/installer/
+
+```
+cd packages/coconut-wasm
+wasm-pack build
+```
 
 ## Mobile App
 
@@ -49,3 +65,6 @@ Go to https://localhost:3000/
 
 > **Note:** the local dev server runs on HTTPS because this is the only way the camera video stream is allowed to be consumed by the browser's script
 
+## Coconut CLI and WASM playground
+
+A CLI for experimenting with Coconut can be found in [packages/coconut-cli](packages/coconut-cli) with a similar tool that runs the Coconut WASM package in the browser ([packages/coconut-wasm/www](packages/coconut-wasm/www)).
