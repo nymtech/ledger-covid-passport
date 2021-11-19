@@ -44,13 +44,14 @@ export const CovidPassShowPrivate: React.FC = () => {
   }, [
     state.verifierAttributes,
     state.verifierPolicy,
+    state.signatureWithShares,
     state.userShowDataBase58,
   ]);
 
   if (
-    !state.signatureWithShares ||
     !state.verifierAttributes ||
-    !state.verifierPolicy
+    !state.verifierPolicy ||
+    !state.signatureWithShares
   ) {
     return (
       <Grid
@@ -62,9 +63,8 @@ export const CovidPassShowPrivate: React.FC = () => {
       >
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
-          <p>
-            Something seems to have gone wrong. Please go back and try again.
-          </p>
+          {!state.signatureWithShares && <p>Sorry, you do not seem to have a valid credential signature. Please get a new credential from your health authority.</p>}
+          {(!state.verifierAttributes || !state.verifierPolicy) && <p>Sorry we do not have any information about the verifier. Please go back and try scan a QR code again.</p>}
         </Alert>
 
         <Grid
