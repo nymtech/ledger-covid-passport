@@ -7,6 +7,7 @@ import { PatientLayout as Layout } from '../../layouts/DefaultLayout';
 import { OnboardingRoutes, OnboardingUrlPaths } from './Onboarding';
 import { AppRoutes, AppUrlPaths } from './App';
 import { ViewItemUrlPaths } from './ViewItem';
+import { ScanQRCode } from '../../components/ScanQRCode';
 
 export const UserUrlPaths = {
   home: '/user',
@@ -68,5 +69,6 @@ const SplashScreen: React.FC = () => (
         <KeyboardArrowRightIcon />
       </Button>
     </Grid>
+    <ScanQRCode hidden />
   </Box>
 );

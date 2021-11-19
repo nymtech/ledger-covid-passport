@@ -4,10 +4,11 @@ import { QrReader } from '@blackbox-vision/react-qr-reader';
 import { useIsMounted } from '../../hooks/useIsMounted';
 
 interface ScanQRCodeProps {
-  onSuccess: (value: string) => void;
+  onSuccess?: (value: string) => void;
+  hidden?: boolean;
 }
 
-export const ScanQRCode: React.FC<ScanQRCodeProps> = ({ onSuccess }) => {
+export const ScanQRCode: React.FC<ScanQRCodeProps> = ({ onSuccess, hidden }) => {
   const videoId = React.useRef(`video-${new Date().toISOString()}`);
   const [validQRCode, setValidQRCode] = React.useState<boolean>(false);
   const isMounted = useIsMounted();
@@ -28,11 +29,13 @@ export const ScanQRCode: React.FC<ScanQRCodeProps> = ({ onSuccess }) => {
               if (result) {
                 if (isMounted()) {
                   setValidQRCode(true);
-                  onSuccess(result.getText());
+                  if(onSuccess) {
+                    onSuccess(result.getText());
+                  }
                 }
               }
             }}
-            containerStyle={{ width: '100%' }}
+            containerStyle={{ width: '100%', visibility: hidden ? 'hidden' : undefined }}
           />
           <Box mt={1}>
             <CircularProgress />
