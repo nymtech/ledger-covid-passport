@@ -82,7 +82,7 @@ export const VerifierShowVerificationQRCode: React.FC = () => {
       mt={5}
       px={2}
     >
-      <Button sx={{ mx: 0, p: 0 }} to={routes.verifier.home} component={Link}>
+      <Button sx={{ mx: 0, p: 0 }} to={routes.verifier.options} component={Link}>
         <KeyboardArrowLeftIcon /> Back
       </Button>
       <Paper elevation={3} sx={{ background: '#eee', mt: 2, p: 2 }}>
