@@ -57,6 +57,7 @@ interface CoconutState {
   setPccHashed: (value: CovidPassAttributes) => void;
   setSignatureWithShares: (value: SignatureWithShares) => void;
   setUserShowDataBase58: (value: string) => void;
+  clearUserShowDataBase58: () => void;
   setVerifierPolicy: (value: VerifierAccessControlPolicy) => void;
   setVerifierAttributes: (value: VerifierAttributes) => void;
 }
@@ -104,6 +105,12 @@ export const useCoconutState = create<CoconutState>((set) => ({
     set(
       produce<CoconutState>((state) => {
         state.userShowDataBase58 = value;
+      }),
+    ),
+  clearUserShowDataBase58: () =>
+    set(
+      produce<CoconutState>((state) => {
+        state.userShowDataBase58 = undefined;
       }),
     ),
   setVerifierPolicy: (value: VerifierAccessControlPolicy) =>
