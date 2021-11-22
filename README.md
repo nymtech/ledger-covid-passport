@@ -1,4 +1,4 @@
-# Nym Private COVID Certificate (PCC) 
+# Private COVID Certificate (PCC) - A Coconut Prototype
 
 The existing Digital Covid Certificates do not provide strong privacy properties, it can expose a lot of information about an individual, and can further be used to create a map of the places the person has visited and therefore be used as a tracking system.
 
